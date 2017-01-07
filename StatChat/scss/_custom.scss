@@ -1,0 +1,274 @@
+/**********************custom.scss STARTS***********************************/
+
+.search-component {
+    text-align: center;
+    padding: 10px 0px;
+    .search-button {
+        width: 95%;
+        height: 31px;
+        background: transparent;
+        border: 1px solid lighten(#d8d8d8, 10%);
+        border-radius: 5px;
+        box-shadow: none;
+        .icon {
+            color: darken(#d8d8d8, 40%);
+            font-size: 1rem;
+        }
+        .search-input {
+            height: 90%;
+            border-color: transparent;
+        }
+    }
+}
+
+$selected-patient-color-bg: #EFEFEF;
+$item-color-bg: transparent;
+.teamcontentscrollableheight .patient-item {
+    background: $item-color-bg;
+    &.selected-patient-bg {
+        background-color: $selected-patient-color-bg;
+        .item {
+            background-color: $selected-patient-color-bg;
+            .item {
+                background-color: $selected-patient-color-bg;
+            }
+        }
+    }
+}
+
+.tab-title {
+    line-height: 1.2rem;
+}
+
+$patient-border-color: #2980B9;
+.no-border-bottom {
+    border: none;
+}
+
+.ion-ios-arrow-back:before {
+    margin-left: 10px;
+}
+
+.top-panel {
+    &-patient {
+        border-bottom: 0.2rem solid $patient-border-color;
+        .item-borderless {
+            border: none;
+            margin-bottom: 1px;
+        }
+    }
+}
+
+.item-complex .item-content {
+    padding: 4px 4px 4px 4px;
+}
+
+.item-complex.patient.item>.item-content {
+    padding: 0;
+}
+
+#dv-form-screen-patient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.item-vertical-centered {
+    align-self: center;
+}
+
+.item-padding-md {
+    padding-left: 15px;
+}
+
+.dv-tab-item {
+    position: relative;
+    width: 25%;
+    float: left;
+    padding-top: 4px;
+    background-color: #fff;
+    color: #303841;
+    font-size: .8rem;
+}
+
+.dv-tab-badge {
+    position: absolute;
+    top: 4%;
+    right: 33%;
+    right: calc(50% - 26px);
+    padding: 1px 6px;
+    height: auto;
+    border-radius: 10px;
+    background-color: #ef473a;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    z-index: 1;
+    font-weight: bold;
+}
+
+.dv-tab-circle {
+    width: 35px;
+    height: 35px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
+    background-color: #2d97de;
+    color: #ffffff;
+    font-size: 0.6em;
+    overflow: hidden;
+}
+
+.circle-container {
+    display: table;
+    position: relative;
+    height: 35px;
+}
+
+.item-green-circle {
+    padding: 5px;
+    text-align: right;
+}
+
+.green-circle {
+    display: inline-block;
+    background-color: lightgreen;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}
+
+.dv-tab-title {
+    height: 8px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+}
+
+.toggle {
+    top: 35% !important;
+}
+
+.handle {
+    width: 12px !important;
+    height: 12px !important;
+    top: .44rem !important;
+}
+
+.track {
+    height: 16px !important;
+}
+
+.camera {
+    text-align: center !important;
+    margin: auto !important;
+    display: block !important;
+    padding-left: 0 !important;
+}
+
+.dv-camera {
+    padding: auto !important;
+    text-align: left !important;
+}
+
+.ion-navicon-round {
+    display: block !important;
+    padding-left: 3px !important;
+}
+
+.toggle .track {
+    width: 32px !important;
+}
+
+.unfollow-star {
+    font-size: 150%;
+    color: #2980b9;
+    display: block;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 17px;
+}
+
+.list-arrow {
+    -webkit-align-items: center !important;
+}
+
+.txt-team-name,
+.txt-location {
+    display: inline !important;
+    width: 85% !important;
+    line-height: 21px !important;
+    padding-top: 5px !important;
+}
+
+.fieldicon {
+    vertical-align: middle !important;
+    margin: 5px !important;
+}
+
+.pad-list-bottom .list:last-child {
+    margin-bottom: 50px;
+}
+
+.toggle-calm>input+.track {
+    width: 33px !important;
+}
+
+.toggle-small input:checked+.track .handle {
+    background: #fff !important;
+}
+
+.toggle-small input:checked+.track {
+    border-color: #4cd964 !important;
+    background: #4cd964 !important;
+}
+
+.toggle-small .track {
+    border: solid 2px #e6e6e6 !important;
+    background-color: #fff !important;
+}
+
+.chk-high-priority {
+    -webkit-flex: none !important;
+}
+
+.dv-task-description {
+    display: table !important;
+    width: 100% !important;
+}
+
+.dv-task-description>span:nth-child(1) {
+    display: table-cell !important;
+    padding-left: 10px !important;
+    vertical-align: top !important;
+}
+
+.dv-task-description>textarea {
+    display: table-cell !important;
+    padding-left: 10px !important;
+    padding-top: 10px !important;
+    padding-bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.followers-list>.list {
+    padding-bottom: 100px !important;
+}
+
+#on-call-toggle>.toggle input:checked+.track {
+    border-color: #11c1f3 !important;
+    background-color: #11c1f3 !important;
+}
+
+.my-task-list>.list {
+    padding-bottom: 50px;
+}
+
+div.list {
+    padding-bottom: 50px;
+}
+
+
+/**********************custom.scss ENDS***********************************/

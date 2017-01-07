@@ -1,0 +1,94 @@
+.convo {
+    & .convo-message {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        & .convo-avatar {
+            padding-left: 10px;
+            padding-right: 5px;
+            align-self: flex-end;
+            padding-bottom: 16px;
+            &.convo-avatar-noavatar {
+                opacity: 0;
+                padding-bottom: 0;
+            }
+        }
+        & .convo-tail {
+            width: 10px;
+            height: 10px;
+            margin-top: auto;
+            margin-bottom: 36px;
+            margin-right: -2px;
+            & g {
+                fill: #30BFB3;
+                & path {
+                    stroke: #30BFB3;
+                }
+            }
+            &.convo-tail-hidden {
+                opacity: 0;
+            }
+        }
+        & .convo-message-text-bg {
+            max-width: 70%;
+            padding-top: 10px;
+            & .convo-message-text {
+                display: inline-flex;
+                max-width: 100%;
+                background-color: #30BFB3;
+                color: #fff;
+                border-radius: 5px;
+                padding: 10px;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                word-break: break-word;
+                -ms-hyphens: auto;
+                -moz-hyphens: auto;
+                -webkit-hyphens: auto;
+                hyphens: auto;
+                & img {
+                    max-width: 150px;
+                    max-height: 150px;
+                }
+            }
+            & .convo-message-date {
+                color: #b3b4b4;
+                font-size: 0.9em;
+            }
+            &.convo-message-text-bg-lesspadding {
+                padding-top: 4px;
+            }
+        }
+        &.convo-otheruser {
+            & .convo-tail {
+                -moz-transform: scaleX(-1);
+                -o-transform: scaleX(-1);
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+                filter: FlipH;
+                -ms-filter: "FlipH";
+            }
+        }
+        &.convo-thisuser {
+            text-align: right;
+            width: 100%;
+            justify-content: flex-end;
+            & .convo-message-text-bg {
+                & .convo-message-text {
+                    text-align: left;
+                    background-color: #367AB2;
+                }
+            }
+            & .convo-tail {
+                margin-right: 5px;
+                margin-left: -2px;
+                & g {
+                    fill: #367AB2;
+                    & path {
+                        stroke: #367AB2;
+                    }
+                }
+            }
+        }
+    }
+}

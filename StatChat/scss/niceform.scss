@@ -1,0 +1,207 @@
+@mixin flexible-content($flex-value: 1) {
+    -webkit-box-flex: $flex-value;
+    -webkit-flex: $flex-value;
+    -moz-box-flex: $flex-value;
+    -moz-flex: $flex-value;
+    -ms-flex: $flex-value;
+}
+
+.niceform {
+    margin: 0 auto;
+    width: 90%;
+    padding: 0px;
+    border: 0px;
+    & .niceseparator {
+        margin: 20px auto;
+        height: 1px;
+        border-top: 1px solid #e0e0e0;
+    }
+    & .nicetextseparator {
+        margin: 0 auto;
+        margin-top: 16px;
+        text-align: center;
+        color: #999;
+        border-bottom: 1px solid #e0e0e0;
+        line-height: 0.1em;
+        & span {
+            background-color: #fff;
+            padding: 0 10px;
+        }
+        &.nicesmalltextseparator {
+            width: 60%;
+        }
+    }
+    & .nicefield {
+        @include flexible-content;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-align-items: center;
+        align-items: center;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        height: 40px;
+        margin: 0 auto;
+        margin-top: 17px;
+        font-size: 15px;
+        &.largenicefield {
+            height: 100px;
+            padding-right: 5px;
+        }
+        & .fieldicon {
+            width: 10%;
+            font-size: 1.7rem;
+            color: #2980B9;
+            text-align: center;
+            padding: 5px;
+        }
+        & input {
+            @include flexible-content(9);
+            padding-top: 0px;
+            padding-left: 5px;
+            font-size: 15px;
+            &[type='checkbox'] {
+                flex: none;
+            }
+        }
+        & label {
+            padding-left: 7px;
+            margin-top: -1px;
+            color: #999;
+        }
+        & textarea {
+            @include flexible-content(9);
+            padding-top: 0px;
+            padding-left: 5px;
+            font-size: 15px;
+        }
+        & .nicetext {
+            color: #999;
+        }
+        & .fielddropdown {
+            @include flexible-content(9);
+            width: 150px;
+            margin-left: 5px;
+            margin-right: 10px;
+        }
+        & .nicedatepicker {
+            flex: 1;
+            width: 10%;
+            -webkit-align-items: center;
+            align-items: center;
+            padding-top: 15px;
+            color: #2980B9;
+            @media #{$iphone4N5} {
+                padding-top: 10px;
+            }
+        }
+        & .fieldbuttons {
+            & .button {
+                min-height: auto;
+                height: 32px;
+                line-height: normal;
+            }
+        }
+        & .fieldrighttitle {
+            @include flexible-content(3);
+            color: #999;
+            padding-right: 7px;
+            padding-left: 7px;
+            -webkit-align-items: center;
+            align-items: center;
+            text-align: center;
+            &.flex-gender {
+                @include flexible-content(4);
+            }
+            &.longtitle {
+                @include flexible-content(5);
+            }
+        }
+        & .fieldrightlongtitle {
+            -webkit-box-flex: 4;
+            -webkit-flex: 4;
+            -moz-box-flex: 4;
+            -moz-flex: 4;
+            -ms-flex: 4;
+            flex: 4;
+            color: #999;
+            padding-right: 7px;
+            padding-left: 10px;
+            -webkit-align-items: center;
+            align-items: center;
+            text-align: right;
+        }
+        & .erroricon {
+            width: 10%;
+            font-size: 1.7rem;
+            color: red;
+            padding: 0px;
+            display: none;
+        }
+        &.errorfield {
+            border: 1px solid red;
+            & .fieldicon {
+                color: red;
+            }
+            & .erroricon {
+                display: block;
+            }
+        }
+        &.disabledfield {
+            background: #d3d3d3;
+            align-items: center;
+            & .fieldvalue {
+                @include flexible-content(5);
+                font-size: 15px;
+                padding-left: 10px;
+            }
+            & input {
+                background-color: #d3d3d3;
+            }
+        }
+        & .splitfield {
+            @include flexible-content(4);
+            display: -webkit-flex;
+            display: flex;
+            height: 100%;
+            & input.splitleft,
+            & input.splitright {
+                font-size: 15px;
+                height: 100%;
+                width: 50%;
+                border: 0px;
+                padding-left: 5px;
+            }
+            & input.splitleft {
+                border-right: 1px solid #e0e0e0;
+                border-top-right-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+        }
+    }
+    & .niceinlineresults {
+        & .niceinlineresult {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 2px 0;
+        }
+    }
+    & .errortext {
+        color: #fff;
+        background-color: red;
+        border-radius: 5px;
+        margin-top: 16px;
+        padding: 0 10px;
+        & div {
+            padding: 10px 0;
+        }
+    }
+    &.niceformlogin .nicefield {
+        margin-left: 27px;
+        margin-right: 27px;
+        background-color: #fff;
+    }
+}
+
+
+/* end of invite user form styles */

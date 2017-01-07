@@ -1,0 +1,172 @@
+﻿/**********************popup.scss STARTS***********************************/
+
+.popup-container .popup {
+    background-color: #278EF6;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    .popup-head {
+        height: 35px;
+        background-color: #278EF6;
+        border-bottom: 0;
+        padding: 0;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        .popup-title {
+            font-size: 1.25rem !important;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+    }
+    .popup-body {
+        height: 80px;
+        background-color: #278EF6;
+        padding: 0;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        @include absolute-center;
+    }
+    .popup-buttons {
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        align-items: center;
+        background-color: #278EF6;
+        padding-top: 7px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        .button {
+            font-size: 12px;
+            border-color: $font-white;
+            background-color: $font-white;
+            color: #278EF6;
+            border-radius: 10px;
+            width: 75% !important;
+            font-weight: bold !important;
+            min-width: 80px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            margin-bottom: 12px !important;
+            line-height: 0px;
+            -webkit-box-flex: 0;
+            -webkit-flex: 0;
+            -moz-box-flex: 0;
+            -moz-flex: 0;
+            -ms-flex: 0;
+            flex: 0;
+        }
+    }
+}
+
+.popup-label {
+    height: 35px;
+    font-size: 12px;
+    min-width: 187.5px;
+    width: 75%;
+    position: relative;
+    #statusMsg {
+        left: 0;
+        direction: ltr;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.addImagePopup {
+    top: 190px !important;
+    .popup-body {
+        display: none;
+    }
+}
+
+.imgContainer {
+    display: inline-block;
+    position: relative;
+    max-width: 90px;
+    max-height: 90px;
+    margin-top: 10px;
+    text-align: left;
+    overflow: hidden;
+    & .imgPreview {
+        max-width: 90px;
+        max-height: 90px;
+    }
+    & .imgClose {
+        position: absolute;
+        right: 0;
+        top: 0;
+        padding: 0 0 10px 10px;
+        color: red;
+        font-size: 20px;
+    }
+    &.imgHidden {
+        display: none;
+        -webkit-animation-play-state: paused;
+        -moz-animation-play-state: paused;
+        -o-animation-play-state: paused;
+        animation-play-state: paused;
+    }
+}
+
+.caption-popup-key,
+.caption-popup-value {
+    border: 0px !important;
+}
+
+.caption-popup-key {
+    text-align: right;
+}
+
+
+/* Common styles for patient and team popups*/
+
+.team-popup .popup,
+.patient-popup .popup,
+.success-popup .popup {
+    .popup-head {
+        display: none;
+    }
+}
+
+
+/* Styles for success popups */
+
+.success-popup .popup {
+    .popup-buttons {
+        .button {
+            margin-top: 0px !important;
+        }
+    }
+}
+
+
+/* Styles for error popup */
+
+.error-popup .popup,
+.error-popup .popup .popup-head,
+.error-popup .popup .popup-body,
+.error-popup .popup .popup-buttons {
+    background-color: #fff !important;
+    color: #DA312E;
+}
+
+.popup-container.error-popup .popup .popup-head .popup-title {
+    color: #DA312E;
+}
+
+.error-popup .popup {
+    .popup-body {
+        color: #DA312E;
+        height: 60px !important;
+    }
+    .popup-buttons {
+        background-color: #FFF !important;
+        .button {
+            color: #FFF;
+            background-color: #DA312E;
+        }
+    }
+}
+
+
+/**********************popup.scss ENDS***********************************/

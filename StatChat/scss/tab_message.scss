@@ -1,0 +1,13 @@
+.compose-chat {
+    @include absolute-center;
+    &:before {
+        content: url('../img/message-icons/composeIcon.svg');
+        vertical-align: sub;
+    }
+}
+
+@media #{$ipadMiniNAir} {
+    // .compose-chat:before {
+    //     content: url('../img/message-icons/composeIconTablet.svg');
+    // }
+}

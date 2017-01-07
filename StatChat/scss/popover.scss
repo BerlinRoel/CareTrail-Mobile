@@ -1,0 +1,116 @@
+﻿/**********************popover.scss STARTS***********************************/
+
+// TOP MENU //
+#menupopovertop {
+    margin-top:0px !important;     
+    background-color: $app-color;
+    height: 10.9rem !important;
+
+    .scroll-content {
+        background-color: $app-color;
+        height: 10.9rem;
+        padding-top: .4rem;        
+        .scroll {
+            background-color: $app-color;
+        }
+    }
+}
+
+.popover {
+  height: 125px !important;
+  width: 150px !important;
+}
+
+.menuDiv {
+  background-color: $app-color; 
+  padding: 1px;
+
+    .row {
+        margin-top: 0px !important;
+        padding: 0.55rem !important;
+        padding-left: 0.3rem !important;
+        padding-right: 0rem !important;
+
+        .ct-width {
+            width: 25% !important;
+        }
+
+        .ct-width-lg {
+            width: 75% !important;
+        }
+    }
+
+    .logoutDiv { 
+        border-top: medium ridge #FFFFFF;
+        border-width: 1px 0px 0px 0px;
+        margin-top: 0px !important;
+        justify-content: center;
+    } 
+}
+
+.ct-menu-icon:before {
+	content: url('../img/menu-icons/MenuHamburger.png') !important;
+}
+
+.ct-sm-patient-icon:before {
+	content: url('../img/menu-icons/CreatePatientIcon-Menu.svg') !important;
+	position: absolute;
+}
+
+.ct-add-person-icon:before {
+	content: url('../img/menu-icons/AddTeamMemberIcon-Menu.svg') !important;
+	position: absolute;
+}
+
+.ct-create-team-icon:before {
+	content: url('../img/menu-icons/CreateTeamIcon-Menu.svg') !important;
+	position: absolute;
+}
+
+.ct-profile-icon:before {
+	content: url('../img/menu-icons/ProfileIcon-Menu.svg') !important;
+	position: absolute;
+}
+
+.menuLink {
+	color : #FFFFFF;
+	visited: #FFFFFF; 
+	font-size: 12px;
+	text-decoration: none;
+    	margin-left: auto;
+    	margin-right: auto;    
+}
+
+.status {
+    color: #FFF;
+    font-size: 12px;
+}
+
+
+@media #{$ipadMiniNAir}{	
+    #menupopovertop {
+        width: 15rem !important;
+        left: 500 !important;
+        top: 100;
+    }
+
+    .menuDiv {
+        
+        .row {
+            .ct-width {
+                width: 20% !important;
+                padding-left: 0.5rem;
+            }
+        }
+    }
+
+    .menuLink, .status {
+        font-size: $l-size;
+    }
+}
+// END of TOP MENU //
+
+
+
+
+/**********************popover.scss ENDS***********************************/

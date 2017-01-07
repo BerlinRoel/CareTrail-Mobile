@@ -1,0 +1,75 @@
+@charset "UTF-8";
+/** START avatar.scss **/
+
+/** iPhone 6S+ **/
+$screen-ip6plus-min: 414px;
+$screen-ip6plus-max: 736px;
+
+/** iPhone 5/5S **/
+$screen-ip55s-min: 320px;
+$screen-ip55s-max: 568px;
+
+/** 1080p screen **/
+$screen-1080p-min: 360px;
+$screen-1080p-max: 640px;
+
+@mixin iphone6plus {
+  @media only screen
+  //and (min-aspect-ratio: 1/1)
+  //and (min-width: $screen-ip6plus-min)
+  and (max-width: $screen-ip6plus-max) {
+    @content;
+  }
+}
+
+@mixin iphone55s {
+  @media only screen
+  //and (min-width: $screen-ip55s-min)
+  and (max-width: $screen-ip55s-max)
+  and (min-aspect-ratio: 1/1) {
+    @content;
+  }
+}
+
+@mixin screen_1080p {
+  @media only screen
+  //and (min-width: $screen-1080p-min)
+  and (max-width: $screen-1080p-max) {
+    @content;
+  }
+}
+
+.avatar {
+  padding: 5px;
+  align-self: flex-start;
+  padding-top: 9px;
+}
+
+.avatar img {
+  width: 3em;
+}
+
+@media #{$ipadMiniNAir}{
+  .avatar {
+    padding-top: 4px;
+  }
+
+  .avatar img {
+      width: 4em;
+      margin: 5px;
+  }
+}
+
+.avatar-image {
+  display: block;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  width: 3em;
+  height: auto;
+}
+
+@media only screen and (min-aspect-ratio: 13/9) {
+  width: 40%;
+}
+
+/** END avatar.scss **/

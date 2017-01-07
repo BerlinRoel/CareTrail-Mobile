@@ -1,0 +1,625 @@
+﻿/********************************main-style.scss STARTS***********************************/
+
+/////// TIMELINE SCREEN ////////
+
+/******* timeline tab *******/
+
+// .timeline-padding {
+//   padding-left: 5%;
+// }
+@mixin flexible-content($flex-value: 1) {
+    -webkit-box-flex: $flex-value;
+    -webkit-flex: $flex-value;
+    -moz-box-flex: $flex-value;
+    -moz-flex: $flex-value;
+    -ms-flex: $flex-value;
+}
+
+.dynamic-col {
+    @include flex(0, 0, 20%);
+    max-width: 20%;
+}
+
+.user-image {
+    display: block;
+    border-radius: 50%;
+    border: 1.7px solid black;
+}
+
+.timestamp {
+    text-align: right;
+}
+
+.timeline-text-md {
+    font-size: $m-size;
+}
+
+.timeline-text-sm {
+    font-size: $s-size;
+}
+
+.timeline-text-xs {
+    font-size: $xs-size;
+}
+
+.timeline-text-primary {
+    color: #2980b9;
+}
+
+.timeline-text-secondary {
+    color: #aec9e3;
+}
+
+.timeline-text-tertiary {
+    color: #b2b3b4;
+}
+
+.timeline-text-alt {
+    color: #888;
+}
+
+.timeline-patient-data {
+    padding-top: 3px;
+}
+
+.img-placeholder-icon {
+    font-size: $xxl-size;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .ion-person {
+        color: #FFFFFF;
+        background: #bbb;
+        border: 1px solid black;
+        padding: 7px 12px;
+        border-radius: 25px;
+    }
+    .ion-no-avatar {
+        min-width: 43px;
+        min-height: 43px;
+        padding: 10px 0;
+        font-size: 0.6em;
+        text-align: center;
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.list-arrow {
+    @include absolute-center;
+}
+
+// Media Queries //
+@media #{$iphone4N5} {
+    .timeline-text-md {
+        font-size: $m-size - 0.1;
+    }
+    .timeline-text-sm {
+        font-size: $s-size - 0.1;
+    }
+    .timeline-text-xs {
+        font-size: $xs-size - 0.1;
+    }
+}
+
+@media #{$iphone6} {
+    .timeline-text-md {
+        font-size: $m-size;
+    }
+    .timeline-text-sm {
+        font-size: $s-size;
+    }
+    .timeline-text-xs {
+        font-size: $xs-size;
+    }
+    .timeline-footer-popover {
+        top: 305px;
+        left: 10px;
+    }
+    .timeline-footer-popover.popover {
+        height: 240px !important;
+    }
+}
+
+@media #{$nexus4} {
+    .item-toggle .toggle {
+        right: 32px !important;
+    }
+}
+
+@media #{$iphone6Plus} {
+    .timeline-text-md {
+        font-size: $l-size;
+    }
+    .timeline-text-sm {
+        font-size: $m-size;
+    }
+    .timeline-text-xs {
+        font-size: $xs-size;
+    }
+    .timeline-footer-popover.popover {
+        height: 280px !important;
+    }
+    .img-placeholder-icon {
+        @include justify-content(flex-start);
+    }
+}
+
+@media #{$ipadMiniNAir} {
+    // .user-image {
+    //     width: 40%;
+    // }
+    .timeline-text-md {
+        font-size: $l-size + 0.2rem;
+    }
+    .timeline-text-sm {
+        font-size: $m-size + 0.1rem;
+    }
+    .timeline-text-xs {
+        font-size: $s-size + 0.1rem;
+    }
+    .timeline-footer-popover {
+        top: 500px;
+        left: 10px;
+    }
+    .timeline-footer-popover.popover {
+        height: 370px !important;
+        width: 250px !important;
+    }
+    .timeline-footer-popover .scroll-content {}
+    // .timeline-padding {
+    //     padding-left: 3%;
+    // }
+    .dynamic-col {
+        @include flex(0, 0, 10%);
+        max-width: 10%;
+    }
+}
+
+
+/******** task tab *********/
+
+.icon-label {
+    text-align: right;
+    color: $font-blue;
+}
+
+.addIcon {
+    font-size: 1.2rem;
+    color: $font-blue !important;
+}
+
+.nav-top {
+    top: 43px;
+}
+
+.timeline-list,
+.patient-list,
+.team-list {
+    margin-top: 47px;
+    @media #{$iphone6Plus} {
+        margin-top: 48px;
+    }
+}
+
+.team-detail-list {
+    margin-top: 46px;
+    @media #{$iphone6Plus} {
+        margin-top: 47px;
+    }
+}
+
+.patient-list,
+.team-list,
+.team-detail-list,
+.patient-details {
+    .item-content {
+        padding: 4px 4px 4px 4px !important;
+    }
+}
+
+.patient-list .item-content .list-arrow {
+    -webkit-align-items: center !important;
+}
+
+.patient-details {
+    margin-top: 126px;
+}
+
+.subfooterchat.create-task {
+    bottom: 55px !important;
+    @media #{$ipadMiniNAir} {
+        bottom: 90px !important;
+    }
+}
+
+.search-patient-header {
+    display: -webkit-flex;
+    display: flex;
+}
+
+.search-patient-header>.item {
+    margin: -1px -2px;
+}
+
+.timeline-bottom-content {
+    bottom: 110px;
+}
+
+////////// TEAM SCREEN ///////////
+
+/******** my teams tab ********/
+
+.row-height-team-list {
+    line-height: 0.30rem !important;
+}
+
+.item-options {
+    @include absolute-center;
+}
+
+//////// PATIENT HOME SCREEN ////////
+#patient-info-component {
+    background: #2db4a9 !important;
+    color: #ffffff !important;
+    height: 5rem;
+}
+
+#patient-info-component ion-spinner {
+    stroke: #fff;
+    fill: #fff;
+}
+
+.ptn-info-container {
+    @include flexbox();
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    @include justify-content(center);
+}
+
+.ptn-info-label,
+.ptn-info-value {
+    padding: 2px;
+    font-size: $s-size;
+    color: #ffffff;
+}
+
+.ptn-info-label {
+    text-align: right;
+    opacity: 0.6;
+}
+
+.ptn-btn {
+    @include flexbox();
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    @include justify-content(center);
+    @include align-items(center);
+    .unfollow-patient-icon {
+        color: #ffffff;
+        font-size: 2.5rem;
+    }
+    .unfollow-patient-text {
+        background: transparent;
+        border: 0px solid transparent;
+        padding: 0px;
+        font-size: $xs-size;
+        color: #ffffff;
+    }
+}
+
+.department-name {
+    font-size: $s-size;
+    opacity: 0.7;
+}
+
+.on-call {
+    font-size: $m-size;
+    .row {
+        align-items: center;
+    }
+    .on-call-text {
+        @include flexible-content(9);
+        opacity: 0.7;
+        padding: 0px;
+        margin: 0px;
+        @media #{$ipadMiniNAir} {
+            @include flexible-content;
+        }
+    }
+    .on-call-icon {
+        flex: 3;
+        padding: 0px;
+        margin: 0px;
+        margin-top: -2px;
+        &::after {
+            content: "\25CF";
+            font-size: $m-size;
+            color: #7ed355;
+        }
+    }
+}
+
+.contact-info-panel {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-transition: height 5s ease;
+    -moz-transition: height 5s ease;
+    -ms-transition: height 5s ease;
+    -o-transition: height 5s ease;
+    transition: height 5s ease;
+}
+
+.phone-number {
+    flex: 6;
+}
+
+.call-now,
+.message-user {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 1.8rem;
+}
+
+.call-now.button,
+.message-user.button {
+    line-height: 0px;
+    min-height: 0px;
+    border-radius: 7px;
+    border-width: 1px;
+    color: #fff;
+    background-color: #7ed355;
+    border: 1px solid #559337;
+    box-shadow: inset 0 1px 0 #a4ef80;
+    font-size: 14px;
+    flex: none;
+    width: 6rem;
+}
+
+.call-now.button,
+.message-user.button {
+    float: left;
+}
+
+.call-now.button span,
+.message-user.button span {
+    margin-left: 20px;
+    position: absolute;
+    top: 12px;
+    left: 10px;
+}
+
+.call-now-icon,
+.message-user-icon {
+    height: 16px;
+    margin-top: 1px;
+    position: absolute;
+    left: 7px;
+    top: 5px;
+}
+
+p.phone-number {
+    margin-bottom: 0px;
+    color: #b2b3b4;
+    padding-top: 3px;
+    padding-left: 3px;
+    padding-right: 3px;
+    float: left;
+}
+
+.call-now.button:after,
+.message-user.button:after,
+p.phone-number:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.dv-contact-user-container {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+@media #{$iphone4N5} {
+    #unfollow-patient-text {
+        font-size: $s-size;
+    }
+}
+
+@media #{$iphone6} {
+    #unfollow-patient-text {
+        font-size: $s-size;
+    }
+}
+
+@media #{$iphone6Plus} {
+    #unfollow-patient-text {
+        font-size: $s-size;
+    }
+}
+
+@media #{$ipadMiniNAir} {
+    #unfollow-patient-text {
+        font-size: $m-size;
+    }
+    .dv-tab-circle {
+        border-radius: 50% !important;
+        height: 52px !important;
+        width: 52px !important;
+    }
+    .dv-tab-title {
+        margin-top: 6px !important;
+    }
+    .dv-tab-item {
+        max-width: 150px !important;
+    }
+    .camera {
+        padding-top: 0 !important;
+    }
+    .dv-camera {
+        padding-top: 0 !important;
+        padding-left: auto !important;
+        padding-right: auto !important;
+    }
+    .ion-camera {
+        display: block !important;
+        text-align: center !important;
+    }
+}
+
+.item-select select {
+    right: auto;
+    padding: 13px 45px 15px 0px;
+    direction: ltr;
+}
+
+#teamDropdown {
+    width: auto;
+}
+
+.button-clear {
+    margin: -15px;
+}
+
+div.search {
+    border-color: #ddd;
+    background-color: #fff;
+    color: #444;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px 10px 0px 0px;
+    padding: 9px 1px 9px 5px !important;
+    border-width: 1px;
+    border-style: solid;
+    font-size: 16px;
+}
+
+.item-select.priority-label {
+    height: 48px;
+    padding: 0px 15px !important;
+}
+
+.modal-backdrop-bg {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.image-modal img {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 15px;
+}
+
+.modal-desc {
+    bottom: 11px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 2.5em;
+    padding-top: 0.6em;
+}
+
+//////// ANIMATIONS ////////
+.scale-in {
+    transform: scale(0.9);
+    opacity: 0;
+}
+
+.scale-in.ng-enter,
+.scale-in>.ng-enter {
+    transition: all cubic-bezier(.1, .7, .1, 1) 400ms;
+}
+
+.scale-in.ng-enter-active,
+.scale-in>.ng-enter-active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.scale-in.ng-leave,
+.scale-in>.ng-leave {
+    transition: all ease-in-out 250ms;
+}
+
+#add-followers-button {
+    position: fixed;
+    z-index: 999;
+    text-align: center;
+}
+
+.buttons.header-item ion-spinner {
+    stroke: #303841;
+    fill: #303841;
+    margin-top: 3px;
+    margin-right: 4px;
+}
+
+/////// PROFILE SCREEN ////////
+.profile {
+    & .profile-top {
+        background-color: #30bfb3;
+        color: #fff;
+        text-align: center;
+        & ng-letter-avatar img {
+            margin-top: 20px;
+            width: 90px;
+            height: 90px;
+        }
+        & img.avatar-image {
+            margin-top: 20px;
+            width: 90px;
+            height: 90px;
+        }
+        & .profile-top-name {
+            font-weight: 600;
+            font-size: 1.4em;
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-bottom: 8px;
+        }
+        & .profile-top-email {
+            font-weight: 100;
+            font-size: 1em;
+            padding-bottom: 14px;
+            margin-bottom: 0;
+        }
+    }
+    & .profile-content {
+        & .profile-content-header {
+            background-color: #248f86;
+            color: #fff;
+            text-align: center;
+            font-size: 1.05em;
+            font-weight: 300;
+            padding: 10px 0;
+        }
+        & .profile-content-entry {
+            display: flex;
+            flex-direction: row;
+            padding: 10px 0;
+            & .profile-content-entry-left {
+                flex: 2;
+                text-align: left;
+            }
+            & .profile-content-entry-center {
+                flex: 4;
+                text-align: center;
+            }
+            & .profile-content-entry-right {
+                flex: 2;
+                text-align: right;
+            }
+        }
+    }
+}
+
+
+/**********************main-style.scss ENDS***********************************/

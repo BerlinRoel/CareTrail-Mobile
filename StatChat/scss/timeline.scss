@@ -1,0 +1,32 @@
+/**** START: Timeline SASS ****/
+
+.timeline-message .timeline-message-text {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: '...';
+        display: inline-block;
+        position: absolute;
+        width: 25%;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        background: #fff;
+    }
+}
+
+.timeline-alert-padding {
+    position: relative;
+    right: 5px;
+}
+
+.taskIconSize {
+    font-size: 1.5rem;
+}
+
+@media #{$screen-1080p} {
+    font-size: 1.6rem;
+}
+
+/**** END: Timeline SASS ****/

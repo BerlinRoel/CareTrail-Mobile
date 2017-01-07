@@ -1,0 +1,36 @@
+.floating-button-bg {
+    background: transparent;
+    border: 0px;
+    margin: 0 auto;
+    .row {
+        @include justify-content(center);
+        .floating-button {
+            @include absolute-center();
+            border-radius: 5px;
+            height: 2rem;
+            color: #fff;
+            background-color: #FF5722;
+            border: 0;
+            font-size: 14px;
+            text-shadow: none;
+            .ion-ios-list-outline::before {
+                opacity: 0.4;
+                margin: 0 auto !important;
+                margin-left: 4px !important;
+                margin-right: 4px !important;
+                font-size: 24px;
+            }
+            p {
+                margin: 0 auto !important;
+                padding-top: 4px;
+                padding-bottom: 6px;
+            }
+        }
+    }
+}
+
+.platform-ios .floating-button-bg .row .floating-button {
+    padding-right: 18px !important;
+    padding-left: 18px !important;
+    text-align: center;
+}

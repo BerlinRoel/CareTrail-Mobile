@@ -1,0 +1,105 @@
+﻿$testSize: 0.8rem;
+$iphone4N5: "(min-width : 320px) and (max-width : 568px)";
+$iphone6: "(min-width : 375px) and (max-width : 667px)";
+$nexus4: "(min-width : 321px) and(max-width : 384px)";
+$iphone6Plus: "(min-width : 414px) and (max-width : 736px)";
+$ipadMiniNAir: "(min-width : 768px) and (max-width : 1024px)";
+$screen-1080p: "(min-width: 360px) and (max-width: 640px) and (max-device-pixel-ratio: 3)";
+$screen-720p: "(min-width: 360px) and (max-width: 640px) and (min-device-pixel-ratio: 2)";
+
+/***COLORS***/
+
+$app-color: #2980B9;
+$font-white: #FFFFFF;
+$font-blue: #66B2FF;
+$color-red: #FF0000;
+$color-green: #5fe6dd;
+$top-panel-bg: #248f86;
+$icon-color: #1a8cff;
+
+/* FONT SIZE VARIABLES */
+
+$xs-size: 0.6rem;
+$s-size: 0.8rem;
+$m-size: 1.0rem;
+$l-size: 1.2rem;
+$xl-size: 1.4rem;
+$xxl-size: 1.8rem;
+$xxxl-size: 2.0rem;
+$vl-size: 2.2rem;
+$tab-height: 3.7rem;
+$tab-icon-size: 2.6rem;
+$tab-text-height: 1.0rem;
+$tab-text-font: 0.6rem;
+$login-app-header: 2.4rem;
+$chat-bottom-postion: 53px;
+
+/***********MIXINS***************/
+
+@mixin flexbox() {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@mixin justify-content($value) {
+    -webkit-box-pack: $value;
+    -webkit-justify-content: $value;
+    -ms-flex-pack: $value;
+    justify-content: $value;
+}
+
+@mixin align-items($value) {
+    -webkit-box-align: $value;
+    -ms-flex-align: $value;
+    -ms-grid-row-align: $value;
+    align-items: $value;
+}
+
+@mixin flex($grow, $shrink, $basis) {
+    -webkit-box-flex: $grow;
+    -webkit-flex: $grow $shrink $basis;
+    -moz-box-flex: $grow $shrink $basis;
+    -moz-flex: $grow $shrink $basis;
+    -ms-flex: $grow $shrink $basis;
+    flex: $grow $shrink $basis;
+}
+
+@mixin absolute-center {
+    @include flexbox();
+    @include justify-content(center);
+    @include align-items(center);
+}
+
+@mixin align-footer-icon {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin mix-login-header {
+    position: relative;
+    margin-top: 15%;
+    text-align: center;
+}
+
+@mixin mix-login-label {
+    padding: 7px 10px 7px 0px;
+    color: $font-white;
+}
+
+@mixin mix-sub-tab-header {
+    color: #fff;
+    visited: $app-color;
+    text-decoration: none;
+}
+
+@mixin mix-tab-icon {
+    width: 80%;
+    height: 80%;
+}
+
+
+/*************************constants.scss ENDS******************************************/

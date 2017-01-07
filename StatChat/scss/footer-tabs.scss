@@ -1,0 +1,140 @@
+﻿/**********************footer-tabs.scss STARTS***********************************/
+
+
+/* footer icon container */
+
+.tabs {
+    height: $tab-height;
+    background-color: #fff !important;
+}
+
+.tabs-positive>.tabs,
+.tabs.tabs-positive {
+    border-top: 1px solid #eeeeee !important;
+    background-image: none;
+    border-bottom: none;
+}
+
+.tabs-icon-top>.tabs .tab-item {
+    line-height: $tab-text-height;
+    padding-top: 5px;
+    color: #303841;
+}
+
+.tab-title {
+    font-size: $tab-text-font;
+    line-height: .5rem;
+    color: #303841;
+}
+
+
+/***** footer icons *****/
+
+.ct-timeline-icon,
+.ct-timeline-icon-on,
+.ct-msg-icon,
+.ct-msg-icon-on,
+.ct-patient-icon,
+.ct-patient-icon-on,
+.ct-team-icon,
+.ct-team-icon-on {
+    @include align-footer-icon;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.ct-timeline-icon {
+    background-image: url('../img/footer-icons/TimelineIcon.svg');
+}
+
+.ct-timeline-icon-on {
+    background-image: url('../img/footer-icons/TimelineIconActive.svg');
+}
+
+.ct-msg-icon {
+    background-image: url("../img/footer-icons/ChatIcon.svg");
+}
+
+.ct-msg-icon-on {
+    background-image: url('../img/footer-icons/ChatIconActive.svg');
+}
+
+.footer-icon-badge {
+    right: 20px;
+}
+
+.ct-patient-icon {
+    background-image: url('../img/footer-icons/PatientIcon.svg');
+}
+
+.ct-patient-icon-on {
+    background-image: url('../img/footer-icons/PatientIconActive.svg');
+}
+
+.ct-team-icon {
+    background-image: url('../img/footer-icons/TeamsIcon.svg');
+}
+
+.ct-team-icon-on {
+    background-image: url('../img/footer-icons/TeamsIconActive.svg');
+}
+
+///// MEDIA QUERIES ////
+@media #{$iphone6} {
+    .tabs {
+        height: $tab-height + 0.2;
+    }
+}
+
+@media #{$iphone6Plus} {
+    .tabs {
+        height: $tab-height + 0.2;
+    }
+}
+
+@media #{$ipadMiniNAir} {
+    .tabs {
+        height: $tab-height + 2;
+    }
+    .ct-timeline-icon {
+        background-image: url('../img/footer-icons/TimelineIconTablet.svg');
+    }
+    .ct-timeline-icon-on {
+        background-image: url('../img/footer-icons/TimelineIconActiveTablet.svg');
+    }
+    .ct-msg-icon {
+        background-image: url('../img/footer-icons/ChatIconTablet.svg');
+    }
+    .ct-msg-icon-on {
+        background-image: url('../img/footer-icons/ChatIconActiveTablet.svg');
+    }
+    .footer-icon-badge {
+        right: 20px;
+    }
+    .ct-patient-icon {
+        background-image: url('../img/footer-icons/PatientIconTablet.svg');
+    }
+    .ct-patient-icon-on {
+        background-image: url('../img/footer-icons/PatientIconActiveTablet.svg');
+    }
+    .ct-team-icon {
+        background-image: url('../img/footer-icons/TeamsIconTablet.svg');
+    }
+    .ct-team-icon-on {
+        background-image: url('../img/footer-icons/TeamsIconActiveTablet.svg');
+    }
+    .tab-item .icon {
+        @include align-footer-icon;
+        height: $tabs-icon-size-ipad;
+    }
+    .tabs-icon-top>.tabs .tab-item {
+        line-height: $tab-text-height + 1;
+    }
+    .tab-title {
+        font-size: $tab-text-font + 0.4;
+    }
+}
+
+
+/**********************footer-tabs.scss ENDS***********************************/

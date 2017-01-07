@@ -1,0 +1,158 @@
+﻿/**********************top-panel.scss STARTS***********************************/
+
+.title.title-center.header-item {
+    font-size: $xl-size;
+}
+
+.nav-bar-title {
+    color: #303841;
+}
+
+.nav-bar-title::after {
+    content: 'TRAIL';
+    color: #FF5722;
+}
+
+.top-panel {
+    background-color: $top-panel-bg !important;
+    padding: 0px 0px 0px 0px;
+}
+
+.icon-style {
+    font-size: $xxxl-size;
+    padding-right: 5px;
+}
+
+.ion-ios-arrow-back:before {
+    position: absolute;
+    bottom: 0px;
+    font-size: 2rem;
+}
+
+.subHeader {
+    color: $font-blue;
+    font-size: $s-size;
+    padding-top: 0.2rem !important;
+    /*  padding-bottom: 0.1rem !important; */
+}
+
+.sub-tab-header {
+    color: #fff;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+    background-color: $top-panel-bg;
+}
+
+.sub-tab-header-backbutton {
+    padding-bottom: 0;
+    padding-top: 0.7rem;
+}
+
+.sub-tab-header>a {
+    @include mix-sub-tab-header;
+    font-size: $l-size;
+}
+
+.sub-tab-header .ion-ios-arrow-back:before {
+    color: #fff;
+    position: relative;
+}
+
+.selectedSubTabDiv {
+    display: inline-block;
+}
+
+.selectedSubTabDiv>a {
+    border-bottom: 0.2rem solid $assertive;
+    padding-bottom: 0.7rem;
+}
+
+.highlightedTab {
+    color: #fff;
+}
+
+.badge-item {
+    border-radius: 50%;
+    background: $assertive;
+    padding: 0rem 0.3rem;
+    width: 0.2rem;
+    height: 0.01rem;
+    color: $font-white;
+    font-size: 0.7rem;
+    vertical-align: text-bottom;
+}
+
+.badge-double-digit {
+    padding: 0.2rem 0.4rem;
+}
+
+.title-font {
+    font-size: $l-size;
+}
+
+.reg-font {
+    font-size: $s-size;
+}
+
+@media #{$iphone4N5} {
+    .reg-font {
+        font-size: $s-size;
+    }
+    .title.title-center.header-item {
+        font-size: $l-size;
+    }
+    .sub-tab-header>a {
+        @include mix-sub-tab-header;
+        font-size: $m-size;
+    }
+}
+
+@media #{$iphone6} {
+    .reg-font {
+        font-size: $m-size;
+    }
+    .title.title-center.header-item {
+        font-size: $xl-size;
+    }
+    .sub-tab-header>a {
+        @include mix-sub-tab-header;
+        font-size: $l-size;
+    }
+}
+
+@media #{$iphone6Plus} {
+    .reg-font {
+        font-size: $m-size;
+    }
+    .title.title-center.header-item {
+        font-size: $xl-size;
+    }
+    .sub-tab-header>a {
+        @include mix-sub-tab-header;
+        font-size: $l-size;
+    }
+}
+
+@media #{$ipadMiniNAir} {
+    .reg-font {
+        font-size: $l-size;
+    }
+    .title.title-center.header-item {
+        font-size: $xxl-size;
+    }
+    .sub-tab-header {
+        padding-bottom: 0.8rem;
+        a {
+            @include mix-sub-tab-header;
+            font-size: $xl-size;
+        }
+    }
+    .ion-ios-arrow-back:before {
+        position: absolute;
+        bottom: -8px;
+        font-size: 3rem;
+    }
+}
+
+
+/**********************top-panel.scss ENDS***********************************/

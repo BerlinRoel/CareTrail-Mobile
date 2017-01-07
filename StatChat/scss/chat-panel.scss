@@ -1,0 +1,172 @@
+﻿/**********************chat-panel.scss STARTS***********************************/
+
+.subfooterchat {
+    border-top-color: #d3d3d3;
+    border-top: 1px solid #ddd;
+    background: #f7f7f7;
+}
+
+.timeline-footer-content {
+    margin: 0px;
+    height: 35px;
+    width: 80%;
+    border: 1px solid #ddd;
+}
+
+.subfooterchat .row .col-10 {
+    text-align: center;
+}
+
+.subfooterchat .row .col-10.camera {
+    padding-top: 6px;
+}
+
+.subfooterchat .row .col-10.send {
+    padding-top: 8px;
+}
+
+.btn-cam,
+.btn-send {
+    color: #808080;
+    font-size: 1.57rem;
+}
+
+.send-icon::before {
+    content: url('../img/message-icons/sendIcon.svg');
+}
+
+.camera-icon::before {
+    content: url('../img/message-icons/cameraIcon.svg');
+}
+
+.chat-icon-style {
+    font-size: $xl-size + 0.2;
+    vertical-align: bottom;
+    color: $icon-color;
+    text-align: center;
+}
+
+.bar-footer {
+    height: auto;
+}
+
+textarea {
+    margin: 0px 0px !important;
+    padding: 5px !important;
+    height: 90%;
+    line-height: 16px !important;
+    display: block !important;
+    resize: none;
+}
+
+.chat-text-area {
+    width: 100% !important;
+    height: 2em;
+    min-height: 2em;
+    max-height: 7em;
+    border-bottom: 1px solid #d8d8d8;
+    line-height: 22px !important;
+    background: transparent;
+    padding: 0 !important;
+    margin-top: 5px !important;
+}
+
+.timeline-footer-popover.popover {
+    height: 220px !important;
+    overflow-y: scroll;
+}
+
+.timeline-footer-popover {
+    top: 368px;
+    left: 49px;
+    margin-left: 0px !important;
+    opacity: 1 !important;
+}
+
+.has-footer.has-tabs {
+    bottom: 49px;
+}
+
+// Media Queries //
+@media #{$iphone4N5} {
+    .timeline-footer-popover {
+        top: 150px;
+        left: 10px;
+    }
+    .platform-android .timeline-footer-popover {
+        top: 350px;
+        left: 10px;
+    }
+    .platform-ios .has-tabs,
+    .bar-footer.has-tabs {
+        bottom: $chat-bottom-postion + 6;
+    }
+    .platform-ios .has-tabs ion-list.timeline-bottom-content>div {
+        bottom: 50px;
+        top: -2px;
+        padding-bottom: 50px;
+    }
+}
+
+@media #{$screen-1080p} {
+    .platform-ios .has-tabs,
+    .bar-footer.has-tabs {
+        bottom: $chat-bottom-postion - 3;
+    }
+}
+
+@media #{$screen-720p} {
+    .platform-ios .has-tabs,
+    .bar-footer.has-tabs {
+        bottom: $chat-bottom-postion + 7;
+    }
+}
+
+@media #{$iphone6} {
+    .timeline-footer-popover {
+        top: 305px;
+        left: 10px;
+    }
+    .timeline-footer-popover.popover {
+        height: 240px !important;
+    }
+    .platform-ios .has-tabs,
+    .bar-footer.has-tabs {
+        bottom: $chat-bottom-postion + 8;
+    }
+}
+
+@media #{$iphone6Plus} {
+    .timeline-footer-popover.popover {
+        height: 280px !important;
+    }
+    .platform-ios .has-tabs,
+    .bar-footer.has-tabs {
+        bottom: $chat-bottom-postion + 8;
+    }
+}
+
+@media #{$ipadMiniNAir} {
+    /*.platform-ios .has-tabs, .bar-footer.has-tabs {
+      bottom: $chat-bottom-postion + 37;
+    }*/
+    .has-tabs,
+    .bar-footer.has-tabs {
+        bottom: $chat-bottom-postion + 37;
+    }
+    .timeline-footer-popover {
+        top: 500px;
+        left: 10px;
+    }
+    .timeline-footer-popover.popover {
+        height: 370px !important;
+        width: 250px !important;
+    }
+    .btn-cam,
+    .btn-send {
+        font-size: 2rem;
+    }
+}
+
+
+/**********************chat-panel.scss ENDS***********************************/

@@ -1,0 +1,137 @@
+﻿/**********************login.scss STARTS***********************************/
+.item-toggle .toggle {
+    top: 0;
+}
+
+.toggle-small.item-toggle .toggle {
+    top: 0;
+}
+
+.platform-ios .item-toggle .toggle {
+    top: 4.5px;
+}
+
+.toggle {
+    .track {
+        height: 25px;
+        width: 45px;
+    }
+
+    .handle {
+        top: 7px;
+        left: 7px;
+    }
+}
+
+.platform-ios .toggle {
+    .track {
+        height: 16px !important;
+        width: 36px !important;
+    }
+
+    .handle {
+        width: 12px !important;
+        height: 12px !important;
+    }
+}
+
+.app-header-home {
+    font-size: $login-app-header + 0.4;	
+    //padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+
+    .color-white{
+        color: $font-white;
+    }
+    .fontColorYellow{
+        color: #FFE699;
+    }
+}
+
+.keyboard-open .app-header-home {
+    padding-top: 4rem;
+}
+
+.login {
+	background: #367ab2; /* Old browsers */
+    background: -moz-linear-gradient(top,  #367ab2 0%, #30bfb3 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #367ab2 0%,#30bfb3 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #367ab2 0%,#30bfb3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#367ab2', endColorstr='#30bfb3',GradientType=0 ); /* IE6-9 */
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+
+    & .loginlogo {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        & img {
+            width: 150px;
+            height: 150px;
+        }
+    }
+
+    & .loginphrase {
+        color: #fff;
+        text-align: center;
+        font-size: 1.2em;
+        padding-top: 1em;
+    }
+}
+
+.bottom-action {
+    width: 100%;
+    padding-bottom: $xs-size / 2;
+    text-align: center;
+
+    .link-label {
+        text-decoration: none;
+        font-size: $s-size;
+        color: $color-green;
+        border-bottom: 1px solid rgba($color-green, 0.5);
+
+        &:hover {
+            border-bottom: none;
+        }
+    }
+}
+
+@media #{$iphone6}{	
+
+	.app-header-home {
+	    font-size: $login-app-header + 0.1;	
+    }
+    .login-label {
+        font-size: $m-size; 
+    }
+
+    .inactive-form {
+        padding-top: 17rem;
+    }
+}
+
+@media #{$iphone6Plus} {	
+
+    .app-header-home {
+	    font-size: $login-app-header + 0.2;	
+    }
+    .login-label {
+        font-size: $m-size; 
+    }
+}
+
+@media #{$ipadMiniNAir}{	
+
+    .app-header-home {
+	    font-size: $login-app-header + 0.4;	
+    }
+    .login-label {
+        font-size: $l-size; 
+    }
+}
+    
+
+/**********************login.scss ENDS***********************************/

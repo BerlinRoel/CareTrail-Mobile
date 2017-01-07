@@ -1,0 +1,13 @@
+//Inline loading component 
+.inline-loading-container,
+.embedded-loading-container {
+   @include absolute-center;
+}
+.inline-loading-container {
+  padding-top: 50%;
+  border-bottom-color: transparent;
+}
+
+.inline-loading-container-nopadding {
+  padding-top: 10px;
+}
