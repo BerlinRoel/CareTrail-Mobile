@@ -1,0 +1,65 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-android-fingerprint-auth": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-ignore-lint-translation": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-privacyscreen": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-secure-storage": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-touchid": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "cordova-plugin-x-toast": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        },
+        "phonegap-plugin-push": {
+            "SENDER_ID": "900487716050",
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.visionit.android.caretrail"
+        }
+    }
+}
