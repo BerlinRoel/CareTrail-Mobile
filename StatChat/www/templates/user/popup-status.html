@@ -1,0 +1,14 @@
+<form name="status" ng-submit="changeStatus()" novalidate >
+	<div class="row">
+		<div class="col" >
+		    <label class="item item-input item-select popup-label">
+			 <select name="statusTime" id="statusMsg" ng-init="statusValue = 'Online'" ng-model="statusValue" ng-change="isAway()">
+		      	<option ng-option value="DoNotDisturb">Do Not Disturb</option>
+		      	<option ng-option value="Online">Available</option>
+		      	<option ng-option value="BeRightBack">Be Right Back</option>
+		      	<option ng-option value="Away">Away</option>
+			  </select> 
+			 </label>
+		</div>
+	</div>
+</form>

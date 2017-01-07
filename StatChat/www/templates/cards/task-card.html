@@ -1,0 +1,35 @@
+<div class="ctcard" ng-click="setClickedItem()">
+	<div class="ctcard-datetime"><i am-time-ago="{{item.created_timestmp / 1000 | amFromUnix}}"></i></div>
+	<div class="ctcard-front" ng-class="{'ctcard-front-isunread': !item.read}">
+		<div class="ctcard-avatar">
+			<ng-letter-avatar charCount="2" fontsize="23" shape="round" avatarcustombgcolor="#30BFB3" data="{{item.assignedTo.username}} {{item.assignedTo.lastName}}"
+				ng-if="!item.assignedTo.useravitar"></ng-letter-avatar>
+			<img ng-src="data:image/jpeg;base64,{{item.assignedTo.useravitar}}" class="avatar-image center-image" ng-if="item.assignedTo.useravitar"
+			/>
+		</div>
+		<div class="ctcard-info">
+			<div class="ctcard-primary">{{item.assignedTo.username}} {{item.assignedTo.lastName}}</div>
+			<div class="ctcard-secondary" ng-if="isTeamTask && item.created_by != null">By: {{item.created_by.username}} {{item.created_by.lastName}}</div>
+			<div class="ctcard-secondary">
+				<i ng-class="item.priority == 'HIGH' ? 'ion-android-alert ctcard-secondary-priority' : 'ion-ios-medkit-outline'"></i>
+				<p>{{item.patient.firstName}} {{item.patient.lastName}}</p>
+			</div>
+			<div class="ctcard-description" ng-bind-html="item.taskdetails | linky"></div>
+		</div>
+		<div class="ctcard-icons">
+			<div class="ctcard-icons-top">
+				<div class="ctcard-icons-status">
+					<div class="ctcard-icons-status-circle" ng-class="{'ctcard-icons-status-active': item.status.length > 0 && item.status[0].status == 'NOT_INITIATED'}"></div>
+					<div class="ctcard-icons-status-circle" ng-class="{'ctcard-icons-status-active': item.status.length > 0 && item.status[0].status == 'INITIATED'}"></div>
+					<div class="ctcard-icons-status-circle" ng-class="{'ctcard-icons-status-active': item.status.length > 0 && item.status[0].status == 'COMPLETED'}"></div>
+				</div>
+			</div>
+			<div class="ctcard-icons-middle">
+				<img class="ctcard-icons-opencard" src="img/open_card.svg" />
+			</div>
+			<div class="ctcard-icons-bottom">
+				<i class="ion-image" ng-show="item.image"></i>
+			</div>
+		</div>
+	</div>
+</div>

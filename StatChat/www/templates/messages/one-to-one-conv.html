@@ -1,0 +1,132 @@
+<ion-view view-cache="false" class="ng-cloak" view-title="{{oneToOneMember.username}} {{oneToOneMember.lastName}}">
+  <ion-nav-bar class="bar-light">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon" ng-click="goBackByPageNo(-1)">
+				<i class="ion-ios-arrow-back"></i> 
+			</button>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="has-skyline">
+    </br>
+
+    <ion-refresher on-refresh="paginateOneToOneConv()"></ion-refresher>
+
+    <ion-list class="zeroBorder" id="TimelineList" ng-show="selectedTab == 'MESSAGE-ONETOONECONV'" on-swipe-down="onSwipeDown()">
+
+      <div class="convo" ng-repeat="oneToOneConv in aoOneToOneConv track by oneToOneConv.conv_Histid">
+
+        <!-- Other user image -->
+        <div class="convo-message convo-otheruser" ng-if="!oneToOneConv.isSameUser && oneToOneConv.image.length > 0">
+          <div class="convo-avatar" ng-class="{'convo-avatar-noavatar': oneToOneConv.text.length > 0 || oneToOneConv.withinNextDateRange}">
+            <ng-letter-avatar charCount="2" avatarcustombgcolor="#30BFB3" data="{{oneToOneConv.fromUser.username}} {{oneToOneConv.fromUser.lastName}}"
+              shape="round" ng-if="oneToOneConv.fromUser.useravitar == null">
+            </ng-letter-avatar>
+            <img ng-src="data:image/jpeg;base64,{{oneToOneConv.fromUser.useravitar}}" class="avatar-image" ng-if="oneToOneConv.fromUser.useravitar != null"
+            />
+          </div>
+          <svg class="convo-tail" ng-class="{'convo-tail-hidden': oneToOneConv.text.length > 0 || oneToOneConv.withinNextDateRange}"
+            width="41px" height="52px" viewBox="0 0 41 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path d="M1,0 C1,0 6.78276848,11.6822596 15.3210324,17.5646702 C26.2827685,25.1167244 40,26.8689295 40,26.8689295 C40,26.8689295 35.4226623,39.0728439 24.7285805,45.3468453 C14.0344988,51.6208467 1,51 1,51"
+                id="Path" stroke="#979797"></path>
+            </g>
+          </svg>
+          <div class="convo-message-text-bg" ng-class="{'convo-message-text-bg-lesspadding': oneToOneConv.withinPriorDateRange}">
+            <div class="convo-message-text">
+              <img ng-src="data:image/jpeg;base64,{{oneToOneConv.image}}" ng-click="showImage(oneToOneConv.image)">
+            </div>
+            <div class="convo-message-date" ng-if="oneToOneConv.text.length <= 0 && !oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange">{{oneToOneConv.created_timestmp / 1000 | amFromUnix | amDateFormat:'MMM D, YYYY - h:mm A'}}</div>
+            <div class="convo-message-date" am-time-ago="{{oneToOneConv.created_timestmp / 1000 | amFromUnix}}" ng-if="oneToOneConv.text.length <= 0 && oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange"></div>
+          </div>
+        </div>
+
+        <!-- Other user message -->
+        <div class="convo-message convo-otheruser" ng-if="!oneToOneConv.isSameUser">
+          <div class="convo-avatar" ng-class="{'convo-avatar-noavatar': oneToOneConv.withinNextDateRange}">
+            <ng-letter-avatar charCount="2" avatarcustombgcolor="#30BFB3" data="{{oneToOneConv.fromUser.username}} {{oneToOneConv.fromUser.lastName}}"
+              shape="round" ng-if="oneToOneConv.fromUser.useravitar == null">
+            </ng-letter-avatar>
+            <img ng-src="data:image/jpeg;base64,{{oneToOneConv.fromUser.useravitar}}" class="avatar-image" ng-if="oneToOneConv.fromUser.useravitar != null"
+            />
+          </div>
+          <svg class="convo-tail" ng-class="{'convo-tail-hidden': oneToOneConv.withinNextDateRange}" width="41px" height="52px" viewBox="0 0 41 52"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path d="M1,0 C1,0 6.78276848,11.6822596 15.3210324,17.5646702 C26.2827685,25.1167244 40,26.8689295 40,26.8689295 C40,26.8689295 35.4226623,39.0728439 24.7285805,45.3468453 C14.0344988,51.6208467 1,51 1,51"
+                id="Path" stroke="#979797"></path>
+            </g>
+          </svg>
+          <div class="convo-message-text-bg" ng-class="{'convo-message-text-bg-lesspadding': oneToOneConv.withinPriorDateRange || oneToOneConv.image.length > 0}">
+            <div class="convo-message-text">{{oneToOneConv.text}}</div>
+            <div class="convo-message-date" ng-if="!oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange">{{oneToOneConv.created_timestmp / 1000 | amFromUnix | amDateFormat:'MMM D, YYYY - h:mm A'}}</div>
+            <div class="convo-message-date" am-time-ago="{{oneToOneConv.created_timestmp / 1000 | amFromUnix}}" ng-if="oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange"></div>
+          </div>
+        </div>
+
+        <!-- Logged in user image -->
+        <div class="convo-message convo-thisuser" ng-if="oneToOneConv.isSameUser && oneToOneConv.image.length > 0">
+          <div class="convo-message-text-bg" ng-class="{'convo-message-text-bg-lesspadding': oneToOneConv.withinPriorDateRange}">
+            <div class="convo-message-text">
+              <img ng-src="data:image/jpeg;base64,{{oneToOneConv.image}}" ng-click="showImage(oneToOneConv.image)">
+            </div>
+            <div class="convo-message-date" ng-if="oneToOneConv.text.length <= 0 && !oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange">{{oneToOneConv.created_timestmp / 1000 | amFromUnix | amDateFormat:'MMM D, YYYY - h:mm A'}}</div>
+            <div class="convo-message-date" am-time-ago="{{oneToOneConv.created_timestmp / 1000 | amFromUnix}}" ng-if="oneToOneConv.text.length <= 0 && oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange"></div>
+          </div>
+          <svg class="convo-tail" ng-class="{'convo-tail-hidden': oneToOneConv.text.length > 0 || oneToOneConv.withinNextDateRange}"
+            width="41px" height="52px" viewBox="0 0 41 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path d="M1,0 C1,0 6.78276848,11.6822596 15.3210324,17.5646702 C26.2827685,25.1167244 40,26.8689295 40,26.8689295 C40,26.8689295 35.4226623,39.0728439 24.7285805,45.3468453 C14.0344988,51.6208467 1,51 1,51"
+                id="Path" stroke="#979797"></path>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Logged in user message -->
+        <div class="convo-message convo-thisuser" ng-if="oneToOneConv.isSameUser">
+          <div class="convo-message-text-bg" ng-class="{'convo-message-text-bg-lesspadding': oneToOneConv.withinPriorDateRange || oneToOneConv.image.length > 0}">
+            <div class="convo-message-text">{{oneToOneConv.text}}</div>
+            <div class="convo-message-date" ng-if="!oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange">{{oneToOneConv.created_timestmp / 1000 | amFromUnix | amDateFormat:'MMM D, YYYY - h:mm A'}}</div>
+            <div class="convo-message-date" am-time-ago="{{oneToOneConv.created_timestmp / 1000 | amFromUnix}}" ng-if="oneToOneConv.isRecent && !oneToOneConv.withinNextDateRange"></div>
+          </div>
+          <svg class="convo-tail" ng-class="{'convo-tail-hidden': oneToOneConv.withinNextDateRange}" width="41px" height="52px" viewBox="0 0 41 52"
+            version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path d="M1,0 C1,0 6.78276848,11.6822596 15.3210324,17.5646702 C26.2827685,25.1167244 40,26.8689295 40,26.8689295 C40,26.8689295 35.4226623,39.0728439 24.7285805,45.3468453 C14.0344988,51.6208467 1,51 1,51"
+                id="Path" stroke="#979797"></path>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+    </ion-list>
+
+    <ion-item class="inline-loading-container inline-loading-container-nopadding item-borderless" ng-if="isLoading">
+      <ion-spinner icon="ios"></ion-spinner>
+    </ion-item>
+
+  </ion-content>
+
+  <ion-footer-bar class="subfooterchat" keyboard-attach>
+
+    <!-- Chat box -->
+    <div class="row chat-row">
+      <div class="rotating-thumbnail camera-image-thumbnail" ng-class="{'camera-image-thumbnail-hidden': base64images.length == 0}"
+        ng-show="base64images.length > 0">
+        <div class="ion-close-circled camera-image-thumbnail-close" ng-click="removeImage()"></div>
+        <img ng-src="data:image/jpeg;base64,{{base64images[0]}}">
+      </div>
+      <div class="col col-10 camera" ng-click="addImagePopup()">
+        <i class="ion-camera btn-cam"></i>
+      </div>
+      <textarea class="chat-text-area" placeholder="Send a message" ng-model="userMessage" ng-focus="focusTextArea" ng-change="autoExpandChatBox()"
+        id="userMessage"></textarea>
+      <div class="col col-10" align="center">
+        <ion-icon class="ion-android-send btn-send" ng-click="postOneToOneConv()">
+        </ion-icon>
+      </div>
+    </div>
+  </ion-footer-bar>
+
+
+</ion-view>

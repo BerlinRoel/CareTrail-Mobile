@@ -1,0 +1,28 @@
+<div class="ctcard" ng-click="setClickedItem()">
+	<div class="ctcard-datetime"><i am-time-ago="{{item.createdTimestamp / 1000 | amFromUnix}}"></i></div>
+	<div class="ctcard-front">
+		<div class="ctcard-avatar">
+			<ng-letter-avatar charCount="2" fontsize="23" shape="round" avatarcustombgcolor="#30BFB3" data="{{item.fromUser.username}} {{item.fromUser.lastName}}"
+				ng-if="!item.fromUser.useravitar"></ng-letter-avatar>
+			<img ng-src="data:image/jpeg;base64,{{item.fromUser.useravitar}}" class="avatar-image center-image" ng-if="item.fromUser.useravitar"
+			/>
+		</div>
+		<div class="ctcard-info">
+			<div class="ctcard-primary">{{item.fromUser.username}} {{item.fromUser.lastName}}</div>
+			<div class="ctcard-secondary" ng-if="!isPatientTimeline">
+				<i class="ion-ios-medkit-outline"></i>
+				<p>{{item.toPatient.firstName}} {{item.toPatient.lastName}}</p>
+			</div>
+			<div class="ctcard-description" ng-bind-html="item.message | linky"></div>
+		</div>
+		<div class="ctcard-icons">
+			<div class="ctcard-icons-top"></div>
+			<div class="ctcard-icons-middle">
+				<img class="ctcard-icons-opencard" src="img/open_card.svg" />
+			</div>
+			<div class="ctcard-icons-bottom">
+				<i class="ion-image" ng-show="item.image"></i>
+			</div>
+		</div>
+	</div>
+</div>

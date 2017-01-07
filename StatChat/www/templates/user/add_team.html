@@ -1,0 +1,60 @@
+<ion-view cache-view="false" view-title="Create Team">
+
+	<form name="teamInfo" ng-submit="addTeam(teamInfo)" novalidate ng-controller="SaveAddTeamCtrl">
+		<ion-nav-bar class="bar-light">
+			<ion-nav-buttons side="left">
+				<button class="button button-icon" ng-click="canceltotimeline()">
+					Cancel
+				</button>
+			</ion-nav-buttons>
+			<ion-nav-buttons side="right">
+				<button class="button button-icon" type="submit" ng-if="!isSubmitting">
+					Save
+				</button>
+				<ion-spinner icon="ios-small" ng-if="isSubmitting"></ion-spinner>
+			</ion-nav-buttons>
+		</ion-nav-bar>
+
+		<ion-content class="padding">
+
+			<div class="niceform">
+				<div class="nicefield {{submitted && teamInfo.teamname.$invalid ? 'errorfield' : ''}}">
+					<span class="fieldicon ion-ios-people-outline"></span>
+					<input type="text" class="txt-team-name" name="teamname" pattern="[A-Za-z0-9_.+\-,][A-Za-z0-9_.+\-, ]+$" placeholder="Team Name"
+						ng-minlength="4" ng-model="teamInfo.fullName" required maxlength="30" />
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<div class="nicefield {{submitted && teamInfo.teamlocation.$invalid ? 'errorfield' : ''}}">
+					<span class="fieldicon ion-earth"></span>
+					<input type="text" class="txt-location" name="teamlocation" class="profile-fields" placeholder="Enter Location" ng-model="teamInfo.location"
+						required maxlength="30">
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<div class="errortext" ng-show='submitted && (teamInfo.teamname.$invalid || teamInfo.teamlocation.$invalid)'>
+					<div ng-show='submitted && teamInfo.teamname.$error.required'>Team Name is required.</div>
+					<div ng-show='submitted && (teamInfo.teamname.$error.required != true) && teamInfo.teamname.$error.minlength'>Team Name Should Contain Atleast 4 Characters</div>
+					<div ng-show='(teamInfo.teamname.$error.required !=true && teamInfo.teamname.$error.minlength != true) 
+	   						&& teamInfo.teamname.$error.pattern'>Team Name allows only AlphaNumeric and the Special Chars(_.+-,).</div>
+					<div ng-show="submitted && teamInfo.teamlocation.$error.required">Team Location is required.</div>
+				</div>
+
+			</div>
+
+		</ion-content>
+
+	</form>
+
+	<div id="walkthrough-content" style="display:none;">
+		<div id="walkthrough-1">
+			<p>Welcome to the team creation page! On this page you'll be able to create a team of users that can manage one or more patients
+				in CareTrail.</p>
+			<p>Click next to learn more...</p>
+		</div>
+
+		<div id="walkthrough-2">
+			Enter your team name here. This will be shown to everyone using the app, so be sure to pick something descriptive!
+		</div>
+	</div>
+</ion-view>

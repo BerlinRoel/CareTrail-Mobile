@@ -1,0 +1,44 @@
+<br>
+<br>
+
+<div class="row caption-head-container">
+	<ion-item class="caption-popup-title col col-80"><h2>Add Caption</h2></ion-item>
+	<ion-item class="col col-20 close-caption" ng-click="closeCaptionPopup()" align="left">Cancel</ion-item>
+</div>
+<br>
+<div class="row img-message-details" ng-show="patient != undefined && patient != null && patient.firstName != '' ">
+	<ion-item class="caption-popup-key col col-25"><h2>Patient:</h2></ion-item>
+	<ion-item class="col col-70 caption-popup-value" align="left">{{patient.firstName}} {{patient.lastName}}</ion-item>
+</div>
+<div class="row img-message-details" ng-show="patient == undefined || patient == null || patient.firstName == '' ">
+	<ion-item class="caption-popup-key col col-25"><h2>Patient:</h2></ion-item>
+	<ion-item class="col col-67 caption-popup-value" align="left">
+		<input type="text" id="patientName" name="patientName" value="" ng-focus="hideStatusBar()" ng-model="patientName" 
+		ng-change="searchPatientByNamePopUp()"/>
+	</ion-item>
+</div>
+<div  id="memberSearchDropDown" ng-show="showPatientDropDown">
+	<div class="default-font" ng-repeat="patient in aoPatient" ng-click="assignPatientPopUp(patient)">{{patient.firstName}} {{patient.lastName}}</div>
+</div>
+<div class="row img-message-details" ng-show="selectedTab == 'TIMELINE-MYTASK'">
+	<ion-item class="caption-popup-key col col-25"><h2>Assign To:</h2></ion-item>
+	<ion-item class="col col-70 caption-popup-value" align="left">{{taskMember.username}} {{taskMember.lastName}}</ion-item>
+</div>
+<br>
+<div class="row form-container">
+	<div class="col col-75 input-container">
+		<input type="text" placeholder="Type Caption Here" id="imageCaption" ng-focus="hideStatusBar()" ng-model="userMessage" value="">
+	</div>
+	<div class="col col-10" ng-show="selectedTab != 'TIMELINE-MYTASK'">
+		<ion-icon class="ion-paper-airplane iconColor iconSizeLarge" ng-click="postUserMessage()"></ion-icon>
+	</div>
+	<div class="col col-10" ng-show="selectedTab == 'TIMELINE-MYTASK'">
+		<ion-icon class="ion-paper-airplane iconColor iconSizeLarge" ng-click="createTask()"></ion-icon>
+	</div>
+</div>
+<br>
+<div class="imgContainer">
+	<img class="imgPreview" ng-src="data:image/jpeg;base64,{{base64images[0]}}"> 
+</div>
+
+

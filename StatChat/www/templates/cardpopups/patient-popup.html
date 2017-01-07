@@ -1,0 +1,47 @@
+<div class="ctcard ctcard-popup">
+	<div class="ctcard-front ctcard-popup-front"></div>
+	<div class="ctcard-back ctcard-popup-back">
+		<div class="ctcard-back-close">
+			<i class="ion-ios-close-empty"></i>
+		</div>
+		<div class="ctcard-back-userinfo ctcard-back-userinfo-noavatar">
+			<p class="ctcard-back-userinfo-1">{{selectedItem.firstName}} {{selectedItem.lastName}}</p>
+			<p class="ctcard-back-userinfo-3">MRN: {{selectedItem.mrn}}</p>
+		</div>
+		<p class="ctcard-back-following" ng-if="selectedItem.isMyPatient">You are following this patient</p>
+		<div class="ctcard-back-list">
+			<ion-scroll zooming="false" direction="y">
+				<div class="ctcard-back-list-item">
+					<i class="ctcard-back-list-item-icon1 ion-earth"></i>
+					<p class="ctcard-back-list-item-text1">Location</p>
+					<p class="ctcard-back-list-item-text2">{{selectedItem.location}}</p>
+				</div>
+				<div class="ctcard-back-list-item">
+					<i class="ctcard-back-list-item-icon1 ion-ios-body-outline"></i>
+					<p class="ctcard-back-list-item-text1">Gender</p>
+					<p class="ctcard-back-list-item-text2">{{selectedItem.sex}}</p>
+				</div>
+				<div class="ctcard-back-list-item">
+					<i class="ctcard-back-list-item-icon1 ion-ios-calendar-outline"></i>
+					<p class="ctcard-back-list-item-text1">DOB</p>
+					<p class="ctcard-back-list-item-text2">{{selectedItem.dob | date: 'MM/dd/yyyy'}}</p>
+				</div>
+				<div class="ctcard-back-list-item">
+					<i class="ctcard-back-list-item-icon1 ion-ios-medkit-outline"></i>
+					<p class="ctcard-back-list-item-text1">Diagnosis</p>
+					<p class="ctcard-back-list-item-text2">{{selectedItem.primarydx}}</p>
+				</div>
+			</ion-scroll>
+		</div>
+		<div class="ctcard-back-buttons">
+			<button type="button" ng-click="button1Click()">
+		<span>{{selectedItem.isMyPatient ? 'Unfollow' : 'Follow'}}</span>
+	</button>
+			<button type="button" ng-click="button2Click()">
+		<span>More Info</span>
+		<i class="ion-ios-arrow-right"></i>
+	</button>
+		</div>
+	</div>
+</div>
+<div class="ctcard-popup-background"></div>

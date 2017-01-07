@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="20px" viewBox="0 0 34 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>Create Patient Icon- Menu</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M27.0644062,0.804961447 C23.2340387,-1.05947655 18.7081844,0.428328324 16.5905829,4.11142571 C16.5885068,4.11142571 16.5885068,4.11142571 16.5885068,4.11350656 C16.5822786,4.12599164 16.5781264,4.13847671 16.5698221,4.14888094 C16.567746,4.15304263 16.5656699,4.15720433 16.5635938,4.16136602 C16.4182682,4.39858246 16.1608343,4.55672675 15.8701831,4.55672675 C15.5774559,4.55672675 15.322098,4.39858246 15.1767724,4.16136602 C15.1746964,4.15928517 15.1726203,4.15304263 15.1705442,4.14888094 C15.164316,4.13847671 15.1560116,4.12599164 15.1518595,4.11350656 C15.1518595,4.11350656 15.1518595,4.11350656 15.1497834,4.11142571 C13.0321818,0.426247478 8.50632756,-1.05947655 4.67596005,0.804961447 C0.606843354,2.78384598 -1.13913988,7.7986848 0.77915799,12.0040745 C2.29262027,15.320943 10.8107763,23.5257187 14.3380361,26.8405064 L14.3401122,26.8405064 C14.7428717,27.2192204 15.2785003,27.454356 15.8701831,27.454356 C16.4556377,27.454356 16.9912663,27.2233821 17.3961019,26.8467489 L17.3961019,26.8467489 C20.9192096,23.5382038 29.447746,15.3251047 30.9632844,12.0040745 C32.8815822,7.7986848 31.1376751,2.78384598 27.0644062,0.804961447 L27.0644062,0.804961447 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="33.7427417" height="29.454356">
+            <rect x="-1" y="-1" width="33.7427417" height="29.454356" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Teams-Screen-1.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Menu-Pop-Sync-Profile" transform="translate(-191.000000, -102.000000)" stroke="#FFFFFF">
+            <g id="MENU-POPUP-AVAILABLE" transform="translate(177.000000, 87.000000)">
+                <g id="MENU-AVAILABLE">
+                    <g id="MENU-POP-UP-WITH-PROFILE">
+                        <g id="Group">
+                            <g>
+                                <g id="CREATE-PATIENT" transform="translate(15.000000, 16.000000)">
+                                    <g id="Create-Patient-Icon--Menu">
+                                        <g id="Create-Patient-Icon">
+                                            <g id="Group-4">
+                                                <g id="Patient-Plus-Sign" transform="translate(9.000000, 7.000000)" stroke-linecap="square">
+                                                    <path d="M7.5,0 L7.5,14.544001" id="Line"></path>
+                                                    <path d="M0,7.5 L14.7497778,7.5" id="Line"></path>
+                                                </g>
+                                                <g id="Patient-Icon-New" stroke-width="2">
+                                                    <g id="Group">
+                                                        <g>
+                                                            <g id="Patient-Heart-2" transform="translate(0.090909, 0.181818)">
+                                                                <g id="Group-2">
+                                                                    <g id="Group">
+                                                                        <g id="`Icons/heart">
+                                                                            <use id="heart" mask="url(#mask-2)" xlink:href="#path-1"></use>
+                                                                        </g>
+                                                                    </g>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

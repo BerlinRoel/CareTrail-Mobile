@@ -1,0 +1,51 @@
+<ion-view view-title="Invite User" cache-view="false" ng-controller="PatientCtrl as ptn">
+	<form name="addFollower" ng-submit="ptn.submitFollower(ptn.newUser)" novalidate>
+		<ion-nav-bar class="bar-light">
+			<ion-nav-buttons side="left">
+				<button class="button button-icon" ng-click="goBackByPageNo(-1)">
+                    Cancel 
+                </button>
+			</ion-nav-buttons>
+			<ion-nav-buttons side="right">
+				<button class="button button-icon invite-button" type="submit" ng-disabled="addFollower.$invalid" ng-if="!ptn.submittingInvite">
+                    Invite
+                </button>
+				<ion-spinner icon="ios-small" ng-if="ptn.submittingInvite"></ion-spinner>
+			</ion-nav-buttons>
+		</ion-nav-bar>
+
+		<ion-content class="nav-top" scroll="false">
+			<fieldset class="niceform">
+				<div class="nicefield disabledfield" id="patientName">
+					<span class="fieldicon ion-ios-medkit-outline"></span>
+					<span class="fieldvalue">{{ptn.currentPatientName}}</span>
+					<span class="fieldrighttitle">Patient</span>
+				</div>
+				<div class="nicefield" id="nameField">
+					<span class="fieldicon ion-ios-person-outline"></span>
+					<div class="splitfield">
+						<input type="text" class="splitleft" name="firstName" placeholder="First Name" ng-model="ptn.newUser.firstName" ng-blur="ptn.checkNameValidation(ptn.newUser.firstName, ptn.newUser.lastName)"
+							required>
+						<!-- function is not DRY -->
+						<input type="text" class="splitright" placeholder="Last Name" ng-model="ptn.newUser.lastName" ng-blur="ptn.checkNameValidation(ptn.newUser.firstName, ptn.newUser.lastName)"
+							required>
+						<!-- function is not DRY -->
+					</div>
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+				<div class="nicetextseparator"><span>How can we contact them?</span></div>
+				<div class="nicefield" id="phoneDiv">
+					<span class="fieldicon ion-ios-telephone-outline"></span>
+					<input type="tel" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" ng-model="ptn.newUser.phoneNumber" ng-blur="ptn.checkPhoneValidation(ptn.newUser.phoneNumber)">
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+				<div class="nicetextseparator nicesmalltextseparator"><span>Or</span></div>
+				<div class="nicefield" id="emailDiv">
+					<span class="fieldicon ion-ios-email-outline"></span>
+					<input type="email" name="email" id="email" placeholder="Email" ng-model="ptn.newUser.email" ng-blur="ptn.checkEmailValidation(ptn.newUser.email)">
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+			</fieldset>
+		</ion-content>
+	</form>
+</ion-view>

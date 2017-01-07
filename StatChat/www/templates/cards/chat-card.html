@@ -1,0 +1,22 @@
+<div class="ctcard ctcard-static">
+	<div class="ctcard-datetime"><i am-time-ago="{{item.updated_timestmp / 1000 | amFromUnix}}"></i></div>
+	<div class="ctcard-front" ng-class="{'ctcard-front-isunread': !item.read}">
+		<div class="ctcard-avatar">
+			<ng-letter-avatar charCount="2" fontsize="23" shape="round" avatarcustombgcolor="#30BFB3" data="{{item.to_user.username}} {{item.to_user.lastName}}"
+				ng-if="!item.to_user.useravitar"></ng-letter-avatar>
+			<img ng-src="data:image/jpeg;base64,{{item.to_user.useravitar}}" class="avatar-image center-image" ng-if="item.to_user.useravitar"
+			/>
+		</div>
+		<div class="ctcard-info">
+			<div class="ctcard-primary">{{item.to_user.username}} {{item.to_user.lastName}}</div>
+			<div class="ctcard-description" ng-bind-html="item.convHist[0].text"></div>
+		</div>
+		<div class="ctcard-icons">
+			<div class="ctcard-icons-top"></div>
+			<div class="ctcard-icons-middle">
+				<i class="ion-ios-arrow-right"></i>
+			</div>
+			<div class="ctcard-icons-bottom"></div>
+		</div>
+	</div>
+</div>

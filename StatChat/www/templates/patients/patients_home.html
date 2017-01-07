@@ -1,0 +1,183 @@
+<meta content="telephone=no" name="format-detection">
+<ion-view view-title="{{patient.firstName}} {{patient.lastName}}" cache-view="false">
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="left">
+			<button class="button button-icon" ng-click="goBackByPageNo(-1)">
+				<i class="ion-ios-arrow-back"></i> 
+			</button>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<ion-content class="nav-top" scroll="false">
+		<!-- Patient Info -->
+		<ion-item class="row item-borderless headerPanelBG paddingOne" id="patient-info-component">
+			<ion-item class="col ptn-info-container item-borderless">
+				<ion-item class="row item-borderless">
+					<ion-item class="col-33 item-borderless ptn-info-label">
+						MRN:
+					</ion-item>
+					&nbsp;&nbsp;
+					<ion-item class="col item-borderless ptn-info-value">
+						{{patient.mrn}}
+					</ion-item>
+				</ion-item>
+				<ion-item class="row item-borderless">
+					<ion-item class="col-33 ptn-info-label item-borderless">
+						Location:
+					</ion-item>
+					&nbsp;&nbsp;
+					<ion-item class="col item-borderless ptn-info-value">
+						{{patient.location}}
+					</ion-item>
+				</ion-item>
+				<ion-item class="row item-borderless">
+					<ion-item class="col-33 ptn-info-label item-borderless">
+						Date of Birth:
+					</ion-item>
+					&nbsp;&nbsp;
+					<ion-item class="col item-borderless ptn-info-value">
+						{{patient.dob | date: 'MM/dd/yyyy' }}
+					</ion-item>
+				</ion-item>
+			</ion-item>
+			<ion-item class="col col-25 ptn-btn item-borderless" ng-click="followRUnFollowPatient(patient)" ng-if="!isFollowingOrUnfollowing">
+				<i ng-if="patient.isMyPatient" class="ion-ios-star unfollow-patient-icon"></i>
+				<i ng-if="!patient.isMyPatient" class="ion-ios-star-outline unfollow-patient-icon"></i>
+				<ion-item class="unfollow-patient-text">{{patient.isMyPatient ? 'Unfollow' : 'Follow'}}</ion-item>
+			</ion-item>
+			<ion-item class="col col-25 ptn-btn item-borderless" ng-if="isFollowingOrUnfollowing">
+				<ion-spinner icon="ios"></ion-spinner>
+			</ion-item>
+		</ion-item>
+
+		<!-- Tabs -->
+		<ion-item class="row item-borderless headerPanelBG paddingOne">
+			<ion-item class="col col-34  sub-tab-header item-borderless  {{selectedTab == 'PATIENT-TIMELINE' ? selectedSubTabDiv: noClass}}"
+				align="center" ng-click="showTimeline()">
+				<a href="" ng-class="{'highlightedTab' : selectedTab == 'PATIENT-TIMELINE'}">TIMELINE</a>
+			</ion-item>
+			<ion-item class="col col-33  sub-tab-header item-borderless {{selectedTab == 'PATIENT-FOLLOWERS' ? selectedSubTabDiv: noClass}}"
+				align="center" ng-click="showFollowers()">
+				<a href="" ng-class="{'highlightedTab' : selectedTab == 'PATIENT-FOLLOWERS'}">FOLLOWERS</a>
+			</ion-item>
+			<ion-item class="col col-33  sub-tab-header item-borderless {{selectedTab == 'PATIENT-ON-CALL' ? selectedSubTabDiv: noClass}}"
+				align="center" ng-click="showFollowersOnCall()">
+				<a href="" ng-class="{'highlightedTab' : selectedTab == 'PATIENT-ON-CALL'}">ON-CALL</a>
+			</ion-item>
+		</ion-item>
+	</ion-content>
+
+	<ion-content class="has-skyline patient-details">
+		<!-- Swipe-Down Search -->
+		<div class="item item-input-inset" ng-show="(isTimeLineSwipedDown && selectedTab == 'PATIENT-TIMELINE')
+													|| (isFollowerSwipedDown && selectedTab == 'PATIENT-FOLLOWERS')
+													|| (isAuditTrailSwipedDown && selectedTab == 'PATIENT-ON-CALL')">
+			<div class="item-input-wrapper search-field">
+				<i class="icon ion-search placeholder-icon iconColor iconSizeMedium ion-ios-search ion-android-search"></i>
+				<input type="text" placeholder="Search" class="col search-box" ng-model="patient.careTrailFilter">
+				<a class="button button-clear" ng-if="patient.careTrailFilter.length" ng-click="patient.careTrailFilter = ''" on-tap="patient.careTrailFilter = ''">
+					<i class="search icon ion-close-circled ion-ios-close-circled ion-android-close-circled"></i>
+				</a>
+			</div>
+		</div>
+
+		<!-- Loading -->
+		<ion-item class="inline-loading-container item-borderless" ng-if="isLoading">
+			<ion-spinner icon="ios"></ion-spinner>
+		</ion-item>
+
+		<!-- No Timeline Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab == 'PATIENT-TIMELINE' && (patientTimeline == null || patientTimeline.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>There is nothing available in this patient's timeline.</p>
+				<p>You can add something to the timeline using the textbox below.</p>
+			</div>
+		</ion-item>
+
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+
+		<!-- Timeline -->
+		<ion-list class="zeroBorder" ng-show="patientTimeline != null && selectedTab == 'PATIENT-TIMELINE'" on-swipe-down="onPatientSwipeDown()">
+
+			<ct-card type="timeline" sub-type="patient-timeline" item="timelineItem" selected-item="selectedItemState.selectedItem" ng-repeat="timelineItem in patientTimeline | filter: patient.careTrailFilter"
+			/>
+
+		</ion-list>
+
+		<!-- No Followers Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab == 'PATIENT-FOLLOWERS' && (aoFollowers == null || aoFollowers.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>This patient has no followers.</p>
+				<p>You can follow the patient by tapping the star above.</p>
+				<p>You can also add other followers by tapping the button below.</p>
+			</div>
+		</ion-item>
+
+		<!-- Followers -->
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+		<ion-list class="zeroBorder pad-list-bottom" ng-hide="binocularhide" ng-show="aoFollowers != null && selectedTab == 'PATIENT-FOLLOWERS'"
+			on-swipe-down="onPatientSwipeDown()">
+
+			<ct-card type="user" item="follower" selected-item="selectedItemState.selectedItem" ng-repeat="follower in aoFollowers | filter:{username: patient.careTrailFilter} | filter:{emailAddress: '!' + userProfile.emailAddress}  | orderBy: 'username'"
+				ng-show="follower != null" />
+
+		</ion-list>
+
+		<!-- No On-Call Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab == 'PATIENT-ON-CALL' && (ptnLnd == null || ptnLnd.onCallFollowers == null || ptnLnd.onCallFollowers.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>This patient has no one available on-call.</p>
+			</div>
+		</ion-item>
+
+		<!-- On-Call Followers -->
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+		<ion-list class="zeroBorder" ng-hide="binocularhide" ng-show="ptnLnd.onCallFollowers != null && selectedTab == 'PATIENT-ON-CALL'"
+			on-swipe-down="onPatientSwipeDown()">
+
+			<ct-card type="user" item="follower.onCallUser" selected-item="selectedItemState.selectedItem" ng-repeat="follower in ptnLnd.onCallFollowers"
+				ng-show="follower != null" />
+
+		</ion-list>
+
+		<ion-infinite-scroll ng-hide="patientTimeLinePageNo === 0 ? true : false" ng-if="selectedTab == 'PATIENT-TIMELINE' && loadPatientTimeLine"
+			on-infinite="paginatePatientTimeLine()" distance="10%"> </ion-infinite-scroll>
+
+	</ion-content>
+
+	<!-- Post To Timeline -->
+	<ion-footer-bar class="subfooterchat" ng-show="(selectedTab == 'PATIENT-TIMELINE') " keyboard-attach>
+		<div class="row">
+			<div class="row" style="margin: 0px">
+				<div class="rotating-thumbnail camera-image-thumbnail" ng-class="{'camera-image-thumbnail-hidden': base64images.length == 0}"
+					ng-show="base64images.length > 0">
+					<div class="ion-close-circled camera-image-thumbnail-close" ng-click="removeImage()"></div>
+					<img ng-src="data:image/jpeg;base64,{{base64images[0]}}">
+				</div>
+				<div class="col col-10 camera" ng-click="addImagePopup()">
+					<i class="ion-camera btn-cam"></i>
+				</div>
+				<textarea class="chat-text-area" placeholder="Say something about this patient" ng-model="userMessage" id="userMessage" ng-change="showPostButton(); autoExpandChatBox()">
+				</textarea>
+				<div class="col col-10" ng-show="postButton">
+					<ion-icon class="ion-android-send btn-send" ng-click="postUserMessage()"></ion-icon>
+				</div>
+			</div>
+		</div>
+	</ion-footer-bar>
+
+	<!-- Add Followers Button -->
+	<ion-footer-bar class="subfooterchat floating-button-bg" ng-show="(selectedTab == 'PATIENT-FOLLOWERS')">
+		<div class="row">
+			<button class="floating-button" ng-click="ptnLnd.goSearchFollowers()" ng-if="$root.userProfile.isExternal == false">
+				<p>Add Followers</p> 
+			</button>
+		</div>
+	</ion-footer-bar>
+
+	<!-- Card Popup -->
+	<ct-card-popup type="{{selectedItemState.selectedItemType}}" sub-type="{{selectedItemState.selectedItemSubType}}" selected-item="selectedItemState.selectedItem"
+		button-1-callback="cardButton1Callback(data)" button-2-callback="cardButton2Callback(data)" image-click-handler="cardOpenImage(image)"
+		on-status-toggle-handler="onStatusToggleHandler(taskId, status)"></ct-card-popup>
+
+</ion-view>

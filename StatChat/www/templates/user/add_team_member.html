@@ -1,0 +1,65 @@
+<ion-view class="has-skyline" cache-view="false" view-title="Add User to Team">
+
+	<form name="teamMember" ng-submit="addTeamMember(teamMemberInfo, team)" novalidate ng-controller="SaveAddTeamMemberCtrl">
+
+		<ion-nav-bar class="bar-light">
+			<ion-nav-buttons side="left">
+				<button class="button button-icon" ng-click="canceltotimeline()">
+					Cancel
+				</button>
+			</ion-nav-buttons>
+			<ion-nav-buttons side="right">
+				<button class="button button-icon" ng-if="!isSubmitting">
+					Add
+				</button>
+				<ion-spinner icon="ios-small" ng-if="isSubmitting"></ion-spinner>
+			</ion-nav-buttons>
+		</ion-nav-bar>
+
+		<ion-content class="padding">
+
+			<div class="niceform">
+
+				<div class="nicefield disabledfield">
+					<span class="fieldicon ion-ios-people-outline"></span>
+					<span class="fieldvalue">{{team.teamName}}</span>
+					<span class="fieldrighttitle">Team</span>
+				</div>
+
+				<div class="nicefield {{hasSearchError ? 'errorfield' : ''}}">
+					<span class="fieldicon ion-ios-search"></span>
+					<input type="text" id="userSearch" placeholder="Search for User" autocomplete="off" name="memberSearch" ng-model="teamMemberInfo.memberSearch"
+						ng-keydown="$event.which === 13 && searchMemberByName()" required maxlength="45" />
+					<span class="fieldrighttitle">
+						<button type="button" class="submit-search-button" ng-if="teamMemberInfo.memberSearch.length" ng-click="searchMemberByName()">
+							<i class="ion-arrow-right-c"></i>
+						</button>
+					</span>
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<!-- Code for inline loading spinner -->
+				<ion-spinner icon="ios-small" class="embedded-loading-container" ng-hide="!teamMemberInfo.isSearching"></ion-spinner>
+				<div id="memberSearchDropDown" class="niceinlineresults" ng-show="memberSearchDropDown">
+					<div class="niceinlineresult" ng-repeat="x in aoMembers" ng-click="selectMemberFrmSearchResult(x)">{{x.username}} {{x.lastName}}</div>
+				</div>
+
+				<ion-item ng-if="aoMembers.length == 0" ng-hide="!teamMemberInfo.memberSearch" id="new-member-search-error" class="search-error"
+					type="item-text-wrap">
+					<div class="row">
+						<span class="search-error-text">No person matched your search query!</span>
+					</div>
+				</ion-item>
+
+				<div class="errortext" ng-show='hasError'>
+					<div ng-show='teamMemberInfo.isMemberRequired'>A user is required.</div>
+					<div ng-show='teamMemberInfo.isMemberNotFound'>No user found.</div>
+					<div ng-show='teamMemberInfo.memberSearch.$error.pattern'>User search only allows alphaNumeric, spaces, -, _, and ,.</div>
+					<div ng-show='teamMemberInfo.isTeamRequired'>Team is required.</div>
+				</div>
+
+			</div>
+
+		</ion-content>
+	</form>
+</ion-view>

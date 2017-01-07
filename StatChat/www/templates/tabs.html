@@ -1,0 +1,44 @@
+<!--
+Create tabs with an icon and label, using the tabs-positive style.
+Each tab's child <ion-nav-view> directive will have its own
+navigation history that also transitions its views in and out.
+-->
+
+<ion-tabs class="tabs-icon-top tabs-positive {{$root.hideTabs ? 'tabs-item-hide' : ''}}">
+
+  <!-- Login Tab (Hidden) -->
+  <ion-tab title="Login" hidden="true" href="#/tab/login">
+    <ion-nav-view name="tab-login"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Patients -->
+  <ion-tab title="Patients" icon-off="ion-ios-medkit-outline" icon-on="ion-ios-medkit" class="patients-footer-icon" href="#/tab/tabpatients/{{userProfile.authToken}}"
+    ng-click="tabNavUrl('Patients')">
+    <ion-nav-view name="tab-tabpatients"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Teams -->
+  <ion-tab title="Teams" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" class="teams-footer-icon" href="#/tab/tabteams/{{userProfile.authToken}}"
+    ng-click="tabNavUrl('Teams')">
+    <ion-nav-view name="tab-tabteams"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Home -->
+  <ion-tab title="Home" badge="taskUnRead" badge-style="badge-assertive" icon-off="ion-ios-home-outline" icon-on="ion-ios-home"
+    class="ct-timeline-profile" href="#/tab/timeline/{{userProfile.authToken}}" ng-click="tabNavUrl('Home')">
+    <ion-nav-view name="tab-timeline"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Chat -->
+  <ion-tab title="Chat" badge="messageUnRead" badge-style="badge-assertive footer-icon-badge" icon-off="ion-ios-chatbubble-outline"
+    icon-on="ion-ios-chatbubble" class="chat-footer-icon" href="#/tab/tabmessages/{{userProfile.authToken}}" ng-click="tabNavUrl('Chat')">
+    <ion-nav-view name="tab-tabmessages"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Profile -->
+  <ion-tab title="Profile" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" class="profile-footer-icon" href="#/tab/profile/{{userProfile.authToken}}"
+    ng-click="tabNavUrl('Profile')">
+    <ion-nav-view name="tab-profile"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>

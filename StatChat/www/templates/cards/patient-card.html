@@ -1,0 +1,22 @@
+<div class="ctcard" ng-click="setClickedItem()">
+	<div class="ctcard-datetime"></div>
+	<div class="ctcard-front">
+		<div class="ctcard-info ctcard-info-noavatar">
+			<div class="ctcard-primary">{{item.firstName}} {{item.lastName}}</div>
+			<div class="ctcard-secondary">
+				<i class="ion-ios-medkit-outline"></i>
+				<p>{{item.location}}</p>
+			</div>
+			<div class="ctcard-description" ng-bind-html="item.primarydx | linky"></div>
+		</div>
+		<div class="ctcard-icons">
+			<div class="ctcard-icons-top">
+				<i class="ion-ios-star" ng-if="item.isMyPatient"></i>
+			</div>
+			<div class="ctcard-icons-middle">
+				<img class="ctcard-icons-opencard" src="img/open_card.svg" />
+			</div>
+			<div class="ctcard-icons-bottom"></div>
+		</div>
+	</div>
+</div>

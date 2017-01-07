@@ -1,0 +1,78 @@
+<ion-view view-cache="false" class="ng-cloak" view-title="Add Follower">
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="left">
+			<button class="button button-icon" ng-click="goBackByPageNo(-1)">
+				<i class="ion-ios-arrow-back"></i> 
+			</button>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<ion-content class="has-skyline" id="userResultsList">
+		<!-- Search Component -->
+		<ion-item class="searchComponent item-complex">
+			<div class="item item-input-inset">
+				<div class="item-input-wrapper search-field">
+					<i class="icon ion-search placeholder-icon iconColor iconSizeMedium"></i>
+					<input type="search" class="col" placeholder="Search for User" ng-model="ptn.userSearch" ng-keydown="$event.which === 13 && ptn.searchForUser(ptn.userSearch)"
+					/>
+					<button type="submit" class="submit-search-button" ng-if="ptn.userSearch" ng-click="ptn.searchForUser(ptn.userSearch)">
+						<i class="ion-arrow-right-c"></i>
+					</button>
+				</div>
+			</div>
+		</ion-item>
+		<!-- End of Search Component -->
+
+		<!-- Code for inline loading spinner -->
+		<ion-item ng-hide="!ptn.searchingInProgress" class="embedded-loading-container">
+			<ion-spinner icon="ios-small"></ion-spinner>
+		</ion-item>
+
+		<!-- No Search Results Message -->
+		<ion-item class="item-borderless" ng-show="!ptn.searchingInProgress && ptn.userCollection">
+			<div class="item-input-wrapper empty-data-field">
+				<p>Your search returned no results.</p>
+			</div>
+		</ion-item>
+
+		<!-- Results List -->
+		<ion-list class="zeroBorder" ng-if="ptn.userSearch">
+			<ion-item class="item-complex" ng-repeat="user in ptn.userCollection">
+				<ion-item class="row item-borderless">
+					<div class="col col-top item-borderless timeline-padding">
+						<div class="row item-borderless">
+							<div class="col col-top item-borderless timeline-text-primary timeline-text-md user-name">
+								<i>{{user.username}} {{user.lastName}}</i>
+							</div>
+						</div>
+						<div class="row item-borderless">
+							<div class="col col-top item-borderless timeline-text-tertiary timeline-text-sm">
+								<i>{{user.emailAddress}}</i>
+							</div>
+						</div>
+					</div>
+					<ion-item class="col col-25 small_font small_font_centered item-borderless timeline-alert-padding follow-patient-btn" align="center"
+						ng-click="ptn.followPatient(user)" ng-if="!user.attemptingToFollow">
+						{{user.isFollowing != null && user.isFollowing == true ? 'Following' : 'Add'}}
+					</ion-item>
+					<ion-item class="col col-25 small_font small_font_centered item-borderless timeline-alert-padding" align="center" ng-if="user.attemptingToFollow">
+						<ion-spinner icon="ios-small"></ion-spinner>
+					</ion-item>
+				</ion-item>
+			</ion-item>
+			<!--<ion-infinite-scroll distance="2" on-infinite="getMoreUsers()"></ion-infinite-scroll>  -->
+		</ion-list>
+		<!-- End of Results List -->
+
+	</ion-content>
+
+	<!-- Floating button -->
+	<ion-footer-bar class="subfooterchat floating-button-bg smaller-floating-button">
+		<div class="row">
+			<button class="floating-button" ng-click="ptn.goToInviteUserForm()">
+				<p>Invite User</p> 
+			</button>
+		</div>
+	</ion-footer-bar>
+	<!-- End of Floating button -->
+</ion-view>

@@ -1,0 +1,92 @@
+<ion-view cache-view="false" view-title="Add New Patient">
+
+	<form name="addpatientform" ng-submit="addPatientSubmit(addpatientform)" novalidate ng-controller="SaveAddPatientCtrl">
+		<div id="dv-form-screen-patient" ng-click="clickOutSide($event)" ng-show="addpatientdata.isDropDownVisible"></div>
+		<ion-nav-bar class="bar-light">
+			<ion-nav-buttons side="left">
+				<button class="button button-icon" ng-click="goBackByPageNo(-1)">
+					Cancel
+				</button>
+			</ion-nav-buttons>
+			<ion-nav-buttons side="right">
+				<button class="button button-icon" type="submit" ng-if="!isSubmitting">
+					Save
+				</button>
+				<ion-spinner icon="ios-small" ng-if="isSubmitting"></ion-spinner>
+			</ion-nav-buttons>
+		</ion-nav-bar>
+
+		<ion-content class="padding">
+
+			<div class="niceform">
+
+				<div class="nicefield {{(submitted && addpatientform.firstName.$invalid) || addpatientform.firstName.$error.pattern || (submitted && addpatientform.lastName.$invalid) || addpatientform.lastName.$error.pattern ? 'errorfield' : ''}}">
+					<span class="fieldicon ion-ios-person-outline"></span>
+					<div class="splitfield">
+						<input type="text" class="splitleft" name="firstName" placeholder="First Name" pattern="[A-Za-z.][A-Za-z \.\-']*$" ng-model="addpatientdata.firstName"
+							required maxlength="30" />
+						<input type="text" class="splitright" name="lastName" placeholder="Last Name" pattern="[A-Za-z.][A-Za-z \.\-']*$" ng-model="addpatientdata.lastName"
+							required maxlength="30" />
+					</div>
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<div class="nicefield {{(submitted && addpatientform.mrn.$invalid) || addpatientform.mrn.$error.number ? 'errorfield' : ''}}">
+					<span class="fieldicon ion-ios-medical-outline"></span>
+					<input type="number" name="mrn" placeholder="MRN" align="center" ng-model="addpatientdata.mrn" required maxlength="17">
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<div class="nicefield {{(submitted && addpatientform.patientDob.$invalid) || isFutureDate(addpatientdata.patientDob) || addpatientform.patientDob.$error.pattern ? 'errorfield' : ''}}">
+					<span class="fieldicon ion-ios-calendar-outline"></span>
+					<input id="fld-date" type="text" name="patientDob" placeholder="MM/DD/YYYY" pattern="(0?[1-9]|1[012])(0?[1-9]|[12][0-9]|3[01])(19|20)\d\d$"
+						ng-model="addpatientdata.patientDobDisplay" ui-mask="99/99/9999" ng-change="setDob()" required />
+					<ionic-datepicker callback="PatientDobCallback" max="currentDate" date="addpatientdata.patientDob" class="nicedatepicker">
+						<input type="text" style="visibility: hidden;" />
+						<i class="icon ion-ios-calendar-outline datepicker-icon"></i>
+					</ionic-datepicker>
+					<span class="fieldrighttitle">DOB</span>
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<div class="nicefield">
+					<span class="fieldicon ion-ios-body-outline"></span>
+					<select class="fielddropdown" id="fld-sex" name="sex" ng-blur="selectValue($event)" ng-click="activateDropDown()" ng-model="addpatientdata.sex"> 
+						<option value=""></option>
+						<option value="Female">Female</option>
+						<option value="Male">Male</option>
+					</select>
+					<span class="fieldrightlongtitle">Gender</span>
+				</div>
+
+				<div class="nicefield">
+					<span class="fieldicon ion-earth"></span>
+					<input type="text" name="location" placeholder="Location" ng-model="addpatientdata.location" maxlength="30">
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<div class="nicefield {{(submitted && addpatientform.primarydx.$invalid) || addpatientform.primarydx.$error.pattern ? 'errorfield' : ''}}">
+					<span class="fieldicon ion-ios-medkit-outline"></span>
+					<input type="text" name="primarydx" placeholder="Primary Diagnosis" pattern="[a-zA-Z0-9_\-][a-zA-Z0-9_\- ]*$" ng-model="addpatientdata.primarydx"
+						required maxlength="50">
+					<span class="erroricon ion-alert-circled"></span>
+				</div>
+
+				<div class="errortext" ng-show='addpatientform.$invalid'>
+					<div ng-show='submitted && (addpatientform.firstName.$error.required || addpatientform.lastName.$error.required)'>Patient Name is required.</div>
+					<div ng-show='addpatientform.firstName.$error.pattern || addpatientform.lastName.$error.pattern'>Patient Name only allows alphanumeric, spaces, ., ', and -.</div>
+					<div ng-show='submitted && addpatientform.mrn.$error.required'>Patient MRN is required.</div>
+					<div ng-show='addpatientform.mrn.$error.number'>Patient MRN may only contain numbers.</div>
+					<div ng-show='submitted && addpatientform.patientDob.$error.required'>Date of Birth is required.</div>
+					<div ng-show='isFutureDate(addpatientdata.patientDob) == true'>Date of Birth cannot be in the future.</div>
+					<div ng-show='addpatientform.patientDob.$error.pattern'>Date of Birth should be in MM/DD/YYYY format.</div>
+					<div ng-show='submitted && addpatientform.primarydx.$error.required'>Primary Diagnosis is required.</div>
+					<div ng-show='addpatientform.primarydx.$error.pattern'>Primary Diagnosis only only alphanumeric, spaces, _, and -.</div>
+				</div>
+
+			</div>
+
+		</ion-content>
+
+	</form>
+</ion-view>

@@ -1,0 +1,99 @@
+<ion-view view-cache="false" class="ng-cloak" view-title="Patients">
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="right">
+			<span class="icon-style" ng-if="$root.userProfile.isExternal == false">
+				<i class="ion-ios-plus-empty" on-hold="onHoldAddPatient()" on-tap="goToAddPatient()"></i>
+			</span>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<!-- Tabs -->
+	<ion-content class="nav-top" scroll="false">
+		<ion-item class="row top-panel item-borderless">
+			<ion-item class="col item-borderless sub-tab-header {{$root.userProfile.isExternal == false ? 'col-50' : ''}} {{selectedTab == 'PATIENT-CURRENT' ? selectedSubTabDiv: noClass}}"
+				align="center">
+				<a href ng-click="showPatientList($event)" ng-class="{'highlightedTab' : selectedTab == 'PATIENT-CURRENT'}">MY PATIENTS</a>
+			</ion-item>
+			<ion-item class="col col-50 item-borderless sub-tab-header {{selectedTab == 'PATIENT-SEARCH' ? selectedSubTabDiv: noClass}}"
+				align="center" ng-if="$root.userProfile.isExternal == false">
+				<a href ng-click="showPatientListSearch($event)" ng-class="{'highlightedTab' : selectedTab == 'PATIENT-SEARCH'}">SEARCH</a>
+			</ion-item>
+		</ion-item>
+	</ion-content>
+	<!-- End Tabs -->
+
+	<ion-content class="has-skyline patient-list">
+		<!-- Search Form -->
+		<ion-item class="searchComponent item-complex" ng-show="showPatientSearch">
+			<div class="col item-input-inset">
+				<div class="item-input-wrapper search-field">
+					<i class="icon ion-search placeholder-icon iconColor iconSizeMedium"></i>
+					<input type="text" class="col" id="patientSearch" placeholder="Search" autocomplete="off" ng-model="patientInfo.patientSearch"
+						ng-keydown="$event.which === 13 && searchPatientByName()" />
+					<button type="submit" class="submit-search-button" ng-if="patientInfo.patientSearch" ng-click="searchPatientByName()">
+						<i class="ion-arrow-right-c"></i>
+					</button>
+				</div>
+			</div>
+		</ion-item>
+		<!-- End Search Form -->
+
+		<!-- Search Loading -->
+		<ion-item ng-show="selectedTab == 'PATIENT-SEARCH'" class="item-complex embedded-loading-container">
+			<div class="ion-spinner-container" ng-hide="!patientInfo.isSearching">
+				<ion-spinner icon="ios-small"></ion-spinner>
+			</div>
+		</ion-item>
+		<!-- End Search Loading -->
+
+		<!-- Search Error -->
+		<ion-item ng-show="showPatientErr && selectedTab == 'PATIENT-SEARCH'" id="patient-search-error" class="search-error item-complex timeline-padding"
+			type="item-text-wrap">
+			<div class="row">
+				<span class="search-error-text">{{showPatientErrMsg}}</span>
+			</div>
+		</ion-item>
+		<!-- End Search Error -->
+
+		<!-- Search Results -->
+		<ion-list class="zeroBorder" ng-show="aoSearchPatient != null && selectedTab == 'PATIENT-SEARCH'">
+
+			<ct-card type="patient" item="patient" selected-item="selectedItemState.selectedItem" ng-repeat="patient in aoSearchPatient track by $id(patient)"
+				ng-show="patient != null && patient.firstName != null" />
+
+		</ion-list>
+		<!-- End Search Results -->
+
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+
+		<!-- My Patients -->
+		<ion-list class="zeroBorder" id="patientsDiv" ng-show="aoPatient != null && selectedTab == 'PATIENT-CURRENT'" on-swipe-down="onSwipeDown()"
+			show-delete="false">
+
+			<ct-card type="patient" item="patient" selected-item="selectedItemState.selectedItem" ng-repeat="patient in aoPatient | filter: patientInfo.patientSearch | orderBy: 'firstName'"
+			/>
+
+		</ion-list>
+		<!-- End My Patients -->
+
+		<!-- Patients Loading -->
+		<ion-item class="inline-loading-container item-borderless" ng-if="isLoading">
+			<ion-spinner icon="ios"></ion-spinner>
+		</ion-item>
+		<!-- End Patients Loading -->
+
+		<!-- No Patients Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && (aoPatient == null || aoPatient.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>You are currently following no patients.</p>
+				<p>Try searching for a patient to follow using the Search tab above.</p>
+			</div>
+		</ion-item>
+		<!-- End No Patients Message -->
+	</ion-content>
+
+	<!-- Card Popup -->
+	<ct-card-popup type="patient" selected-item="selectedItemState.selectedItem" button-1-callback="cardButton1Callback(data)"
+		button-2-callback="cardButton2Callback(data)"></ct-card-popup>
+
+</ion-view>

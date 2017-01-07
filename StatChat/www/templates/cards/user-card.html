@@ -1,0 +1,23 @@
+<div class="ctcard" ng-click="setClickedItem()">
+	<div class="ctcard-datetime"></div>
+	<div class="ctcard-front">
+		<div class="ctcard-avatar">
+			<ng-letter-avatar charCount="2" fontsize="23" shape="round" avatarcustombgcolor="#30BFB3" data="{{item.username}} {{item.lastName}}"
+				ng-if="!item.useravitar"></ng-letter-avatar>
+			<img ng-src="data:image/jpeg;base64,{{item.useravitar}}" class="avatar-image center-image" ng-if="item.useravitar" />
+		</div>
+		<div class="ctcard-info">
+			<div class="ctcard-primary">{{item.username}} {{item.lastName}}</div>
+			<div class="ctcard-secondary">{{item.emailAddress}}</div>
+		</div>
+		<div class="ctcard-icons">
+			<div class="ctcard-icons-top">
+				<div class="ctcard-icons-oncall" ng-if="item.isOnCall"></div>
+			</div>
+			<div class="ctcard-icons-middle">
+				<img class="ctcard-icons-opencard" src="img/open_card.svg" />
+			</div>
+			<div class="ctcard-icons-bottom"></div>
+		</div>
+	</div>
+</div>

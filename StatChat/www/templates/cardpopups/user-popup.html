@@ -1,0 +1,43 @@
+<div class="ctcard ctcard-popup">
+	<div class="ctcard-front ctcard-popup-front"></div>
+	<div class="ctcard-back ctcard-popup-back">
+		<div class="ctcard-back-close">
+			<i class="ion-ios-close-empty"></i>
+		</div>
+		<div class="ctcard-back-userinfo">
+			<div class="ctcard-back-avatar">
+				<ng-letter-avatar dynamic="true" charCount="2" fontsize="23" shape="round" avatarcustombgcolor="#30BFB3" data="{{selectedItem.username}} {{selectedItem.lastName}}"
+					ng-if="!selectedItem.useravitar"></ng-letter-avatar>
+				<img ng-src="data:image/jpeg;base64,{{selectedItem.useravitar}}" class="avatar-image center-image" ng-if="selectedItem.useravitar"
+				/>
+			</div>
+			<p class="ctcard-back-userinfo-1 ctcard-back-userinfo-1-padded">{{selectedItem.username}} {{selectedItem.lastName}}</p>
+		</div>
+		<p class="ctcard-back-following" ng-if="selectedItem.isOnCall">This user is On-Call</p>
+		<div class="ctcard-back-list">
+			<ion-scroll zooming="false" direction="y">
+				<div class="ctcard-back-list-item" ng-if="selectedItem.phoneNumber != null && selectedItem.phoneNumber != ''">
+					<i class="ctcard-back-list-item-icon1 ion-ios-telephone-outline"></i>
+					<p class="ctcard-back-list-item-text1">Phone</p>
+					<p class="ctcard-back-list-item-text2">{{selectedItem.displayPhoneNumber}}</p>
+				</div>
+				<div class="ctcard-back-list-item">
+					<i class="ctcard-back-list-item-icon1 ion-ios-email-outline"></i>
+					<p class="ctcard-back-list-item-text1">Email</p>
+					<p class="ctcard-back-list-item-text2">{{selectedItem.emailAddress}}</p>
+				</div>
+			</ion-scroll>
+		</div>
+		<div class="ctcard-back-buttons">
+			<button type="button" ng-click="button1Click()" ng-if="selectedItem.phoneNumber != null && selectedItem.phoneNumber != ''">
+				<span>Call</span>
+				<i class="ion-ios-arrow-right"></i>
+			</button>
+			<button type="button" ng-click="button2Click()">
+				<span>Message</span>
+				<i class="ion-ios-arrow-right"></i>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="ctcard-popup-background"></div>

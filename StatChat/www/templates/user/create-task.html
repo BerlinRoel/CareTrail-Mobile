@@ -1,0 +1,78 @@
+<ion-view cache-view="false" view-title="Create Task">
+
+  <ion-nav-bar class="bar-light">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon" ng-click="goBackToTask()">
+        Cancel
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon" ng-click="createTask(task)" ng-disabled="!isCreateTask" ng-if="!isSubmitting">
+        Create
+      </button>
+      <ion-spinner icon="ios-small" ng-if="isSubmitting"></ion-spinner>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+
+  <ion-content class="padding">
+    <form name="taskForm" class="niceform">
+
+      <div class="nicefield">
+        <span class="fieldicon ion-ios-medical-outline"></span>
+        <input type="text" autocomplete="off" ng-model="task.patientSearch" required maxlength="255" />
+
+        <span class="fieldbuttons">
+          <button class="button" type="button" ng-show="task.patientSearch.length > 0" ng-click="searchPatientByName(task)" ng-blur="managePatientBlur()" ng-disabled="searchingPatients">Search</button>
+        </span>
+        <span class="fieldrighttitle longtitle">Patient</span>
+        <span class="erroricon ion-alert-circled"></span>
+      </div>
+
+      <div class="memberSearchDropDown" ng-show="showPatientDropDown && (aoPatients | filter: {firstName: task.patientSearch}).length > 0">
+        <div ng-repeat="patient in aoPatients | filter: { firstName:task.patientSearch }| orderBy: 'firstName'" ng-click="selectPatient(patient, task)">
+          {{patient.firstName}} {{patient.lastName}}
+        </div>
+      </div>
+
+      <div class="nicefield">
+        <span class="fieldicon ion-ios-person-outline"></span>
+        <input type="text" autocomplete="off" ng-model="task.memberSearch" required maxlength="255" />
+
+        <span class="fieldbuttons">
+          <button class="button" type="button" ng-show="task.memberSearch.length > 0" ng-click="searchMemberByName(task)" ng-blur="manageMemberBlur()" ng-disabled="searchingMembers">Search</button>
+        </span>
+        <span class="fieldrighttitle longtitle">Assign To</span>
+        <span class="erroricon ion-alert-circled"></span>
+      </div>
+
+      <div class="memberSearchDropDown" ng-show="showMemberDropDown && (aoMembers | filter: {username: task.memberSearch}).length > 0">
+        <div ng-repeat="member in aoMembers | filter: {username: task.memberSearch} | orderBy: 'username'" ng-click="selectMember(member, task)">
+          {{member.username}} {{member.lastName}}
+        </div>
+      </div>
+
+      <div class="nicefield">
+        <span class="fieldicon ion-alert"></span>
+        <input type="checkbox" id="priorityCheckbox" ng-model="task.prioritySearch" />
+        <label for="priorityCheckbox">High Priority</label>
+      </div>
+
+      <div class="nicefield largenicefield">
+        <span class="fieldicon ion-ios-paper-outline"></span>
+        <textarea ng-model="task.taskDesc" placeholder="Task Description" ng-change="setIsCreateTask(task)"></textarea>
+        <span class="erroricon ion-alert-circled"></span>
+      </div>
+
+      <div class="nicefield" ng-click="addImagePopup()">
+        <span class="fieldicon ion-ios-camera-outline"></span>
+        <span class="nicetext">Add Picture</span>
+      </div>
+      <div class="imgContainer rotating-thumbnail" ng-class="{'imgHidden': base64images.length == 0}">
+        <div class="ion-close-circled imgClose" ng-click="removeImage()"></div>
+        <img class="imgPreview" ng-src="data:image/jpeg;base64,{{base64images[0]}}" ng-click="showImage(base64images[0])">
+      </div>
+
+    </form>
+  </ion-content>
+
+</ion-view>

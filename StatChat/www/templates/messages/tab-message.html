@@ -1,0 +1,104 @@
+<ion-view view-cache="false" class="ng-cloak" view-title="Chat">
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="left">
+			<button class="button button-icon" ng-click="toggleSearchInput()" ng-if="searchInput">
+				<i class="ion-ios-arrow-back"></i> 
+			</button>
+		</ion-nav-buttons>
+		<ion-nav-buttons side="right">
+			<span class="icon-style" ng-show="!searchInput">
+				<i class="ion-ios-plus-empty" on-hold="onHoldSearchToggle()" on-tap="toggleSearchInput()"></i>
+			</span>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<ion-content class="has-skyline">
+
+		<!-- Search Form -->
+		<form class="searchComponent item-complex item" ng-show="searchInput">
+			<div class="col item-input-inset">
+				<div class="item-input-wrapper search-field">
+					<i class="icon ion-search placeholder-icon iconColor iconSizeMedium"></i>
+					<input type="text" class="col" id="userSearch" placeholder="Search for a user to start a chat" autocomplete="off" ng-model="msg.searchValue"
+					/>
+					<button type="submit" class="submit-search-button" ng-if="msg.searchValue" ng-click="msg.searchForUser(msg.searchValue)">
+						<i class="ion-arrow-right-c"></i>
+					</button>
+				</div>
+			</div>
+		</form>
+
+		<!-- Inline Loading Spinner -->
+		<ion-item class="inline-loading-container item-borderless" ng-if="isLoading">
+			<ion-spinner icon="ios"></ion-spinner>
+		</ion-item>
+
+		<!-- Search Results -->
+		<ion-list class="zeroBorder" id="TimelineList" ng-show="selectedTab == 'MESSAGE-SEARCH'">
+			<ion-item class="item-complex" ng-repeat="resultMember in msg.aoSearchResults | filter:{emailAddress: '!' + userProfile.emailAddress}"
+				type="item-text-wrap" ng-init="$last && rearrangeAvatar()" ng-click="msg.showContactInfo($index)">
+				<ion-item class="row item-complex">
+					<ion-item class="col col-center item-borderless avatar">
+						<ng-letter-avatar charCount="2" avatarcustombgcolor="#30BFB3" data="{{resultMember.username}} {{resultMember.lastName}}"
+							shape="round" ng-if="!resultMember.useravitar">
+						</ng-letter-avatar>
+						<img ng-src="data:image/jpeg;base64,{{resultMember.useravitar}}" class="avatar-image center-image" ng-if="resultMember.useravitar"
+						/>
+					</ion-item>
+					<ion-item class="col col-80  col-top item-borderless">
+						<ion-item class="row item-borderless">
+							<ion-item class="col col-75 col-top item-borderless">
+								<i class="timeline-text-primary timeline-text-md">{{resultMember.username}} {{resultMember.lastName}}</i>
+								<span class="colorRed" ng-show="conversation.priority == '1'">
+										<i class="icon ion-alert iconFontSmall"></i>
+									</span>
+							</ion-item>
+						</ion-item>
+						<ion-item class="row item-borderless ">
+							<ion-item class="col col-top item-borderless item-text-wrap">
+								<i class="timeline-text-tertiary timeline-text-sm formatTextSpace">{{resultMember.emailAddress}}</i>
+							</ion-item>
+						</ion-item>
+					</ion-item>
+				</ion-item>
+				<!-- contact-info-component -->
+				<ion-item class="contact-info-panel item-borderless" ng-init="msg.hideContactInfoOnLoad()">
+					<div class="dv-contact-user-container">
+						<a ng-href="tel:{{resultMember.phoneNumber}}" class="call-now button" ng-if="resultMember.phoneNumber != null && resultMember.phoneNumber != ''">
+							<img src="img/phone-icon.svg" class="call-now-icon"></img>
+							<span>Call Now</span>
+						</a>
+						<p class="phone-number" ng-if="resultMember.phoneNumber != null && resultMember.phoneNumber != ''">
+							{{resultMember.displayPhoneNumber}}
+						</p>
+						<button class="message-user button" ng-click="showConversationDetails(resultMember, 0)">
+							<img src="img/chat-icon.svg" class="message-user-icon"></img>
+							<span>Message</span>
+						</button>
+					</div>
+				</ion-item>
+				<!-- end of contact-info-panel -->
+			</ion-item>
+		</ion-list>
+
+		<!-- No Messages Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && (aoConversation == null || aoConversation.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>You haven't messaged anyone.</p>
+				<p>Try searching for a user to message using the search icon above.</p>
+			</div>
+		</ion-item>
+
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+
+		<!-- Messages List -->
+		<ion-list class="zeroBorder" ng-show="selectedTab == 'MESSAGE-MYMESSAGE'" ng-if="!searchInput">
+			<ct-card type="chat" item="conversation" ng-repeat="conversation in aoConversation | filter: careTrailFilter | orderBy: '-updated_timestmp'"
+				ng-click="showConversationDetailsAndMarkAsRead(conversation)">
+		</ion-list>
+
+		<ion-infinite-scroll ng-hide="userConvPageNo === 0 ? true : false" ng-if="selectedTab === 'MESSAGE-MYMESSAGE' && loadUserConversation"
+			on-infinite="paginateAllConversation()" distance="10%"></ion-infinite-scroll>
+
+	</ion-content>
+</ion-view>

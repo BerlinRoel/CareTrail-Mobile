@@ -1,0 +1,64 @@
+<div class="ctcard ctcard-popup">
+	<div class="ctcard-front ctcard-popup-front"></div>
+	<div class="ctcard-back ctcard-popup-back">
+		<div class="ctcard-back-close" ng-click="onClosePopup()">
+			<i class="ion-ios-close-empty"></i>
+		</div>
+		<div class="ctcard-back-userinfo">
+			<div class="ctcard-back-avatar">
+				<ng-letter-avatar dynamic="true" charCount="2" fontsize="23" shape="round" avatarcustombgcolor="#30BFB3" data="{{selectedItem.assignedTo.username}} {{selectedItem.assignedTo.lastName}}"
+					ng-if="!selectedItem.assignedTo.useravitar"></ng-letter-avatar>
+				<img ng-src="data:image/jpeg;base64,{{selectedItem.assignedTo.useravitar}}" class="avatar-image center-image" ng-if="selectedItem.assignedTo.useravitar"
+				/>
+			</div>
+			<p class="ctcard-back-userinfo-1">{{selectedItem.assignedTo.username}} {{selectedItem.assignedTo.lastName}}</p>
+			<div class="ctcard-back-userinfo-2" ng-if="isTeamTask && selectedItem.created_by != null">By: {{selectedItem.created_by.username}} {{selectedItem.created_by.lastName}}</div>
+			<div class="ctcard-back-userinfo-2">
+				<i class="ion-ios-medkit-outline"></i>
+				<p>{{selectedItem.patient.firstName}} {{selectedItem.patient.lastName}}</p>
+			</div>
+			<p class="ctcard-back-userinfo-3">MRN: {{selectedItem.patient.mrn}}</p>
+		</div>
+		<p class="ctcard-back-datetime">
+			{{selectedItem.created_timestmp / 1000 | amFromUnix | amDateFormat:'MMM D, YYYY - h:mm A'}}
+		</p>
+		<p class="ctcard-back-priority" ng-if="selectedItem.priority == 'HIGH'">
+			High Priority
+		</p>
+		<p class="ctcard-back-unread" ng-if="isTeamTask && !selectedItem.read">
+			{{selectedItem.assignedTo.username}} has not yet read this task
+		</p>
+		<div class="ctcard-back-description">
+			<ion-scroll zooming="false" direction="y">
+				<img ng-src="data:image/jpeg;base64,{{selectedItem.image}}" ng-show="selectedItem.image" ng-click="showImage()" />
+				<div class="ctcard-back-description-text" ng-bind-html="selectedItem.taskdetails | linky"></div>
+			</ion-scroll>
+		</div>
+		<div class="ctcard-back-status-toggle" ng-if="!isTeamTask && selectedItem.status.length > 0">
+			<ul>
+				<li ng-class="{'selected': selectedItem.status.length > 0 && selectedItem.status[0].status == 'NOT_INITIATED'}">Pending</li>
+				<li ng-class="{'selected': selectedItem.status.length > 0 && selectedItem.status[0].status == 'INITIATED'}">In Progress</li>
+				<li ng-class="{'selected': selectedItem.status.length > 0 && selectedItem.status[0].status == 'COMPLETED'}">Completed</li>
+			</ul>
+			<nz-toggle tri-toggle width="300" on-toggle="onStatusToggle()" ng-model="selectedItem.status[0].status" val-false="'NOT_INITIATED'"
+				val-null="'INITIATED'" val-true="'COMPLETED'" color-false="'#ddd'" color-null="'#ddd'" color-true="'#ddd'">
+			</nz-toggle>
+		</div>
+		<div class="ctcard-back-status-teamstatus" ng-if="isTeamTask">
+			<span ng-if="selectedItem.status[0].status == 'NOT_INITIATED'">Pending</span>
+			<span ng-if="selectedItem.status[0].status == 'INITIATED'">In Progress</span>
+			<span ng-if="selectedItem.status[0].status == 'COMPLETED'">Completed</span>
+		</div>
+		<div class="ctcard-back-buttons">
+			<button type="button" ng-click="button1Click()" ng-if="loggedInUserID != selectedItem.assignedTo.userid">
+		<span>Message User</span>
+		<i class="ion-ios-arrow-right"></i>
+	</button>
+			<button type="button" ng-click="button2Click()">
+		<span>View Patient</span>
+		<i class="ion-ios-arrow-right"></i>
+	</button>
+		</div>
+	</div>
+</div>
+<div class="ctcard-popup-background" ng-click="onClosePopup()"></div>

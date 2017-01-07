@@ -1,0 +1,89 @@
+<div ng-show="{{careTrailPopup == 'FOLLOW-PATIENT'}}">
+	<div class="row">
+		<div class="col col-70">Would you like to follow {{patientName}}?</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'FOLLOW-PATIENT-SUCCESSFUL'}}">
+	<div class="row">
+		<div class="col col-70">You are now following {{patientName}}.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'EU-FOLLOW-PATIENT-SUCCESSFUL'}}">
+	<div class="row">
+		<div class="col col-70">You have added {{followerName}} as a follower of {{patientName}}.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'EU-FOLLOW-PATIENT-ERROR'}}">
+	<div class="row">
+		<div class="col col-70">An error has occurred while attempting to follow the patient.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'UNFOLLOW-PATIENT'}}">
+	<div class="row">
+		<div class="col col-70">Would you like to unfollow {{patientName}}?</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'UNFOLLOW-PATIENT-SUCCESSFUL'}}">
+	<div class="row">
+		<div class="col col-70">You have unfollowed {{patientName}}.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'SAVE-PATIENT-SUCCESS'}}">
+	<div class="row">
+		<div class="col col-70">You have created a new patient: {{patientName}}.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'JOIN-TEAM-SUCCESS'}}">
+	<div class="row">
+		<div class="col col-70">You have joined the team {{teamName}}.</div>
+	</div>
+</div>
+
+<div ng-show="careTrailPopup == 'ADD-TEAM-MEMBER'">
+	<div class="row">
+		<div class="col col-70">{{teamUser}} has been added to the team {{selectedTeam.team[0].teamName}}.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'LEAVE-TEAM'}}">
+	<div class="row">
+		<div class="col col-70">Do you want to leave the team {{selectedTeam.teamName}}?</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'LEAVE-USER-TEAM'}}">
+	<div class="row">
+		<div class="col col-70">Do you want to remove {{teamUser}} from the team {{selectedTeam.teamName}}?</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'CREATE-TEAM-SUCCESSFUL'}}">
+	<div class="row">
+		<div class="col col-70">You have successfully created the team {{selectedTeam.teamName}}.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'LEAVE-TEAM-SUCCESSFUL'}}">
+	<div class="row">
+		<div class="col col-70"> You have left the team {{selectedTeam.teamName}}.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'GO-BACK-LOGIN-PAGE-INACTIVE'}}">
+	<div class="row">
+		<div class="col col-70"> For your security, your session has timed out due to inactivity.</div>
+	</div>
+</div>
+
+<div ng-show="{{careTrailPopup == 'LOGOUT'}}">
+	<div class="row">
+		<div class="col col-70">You're about to be logged out of Caretrail. Press Logout to logout or Cancel to return to the app.</div>
+	</div>
+</div>

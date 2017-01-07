@@ -1,0 +1,141 @@
+<ion-view view-cache="false">
+	<ion-nav-title>CARE</ion-nav-title>
+
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="right">
+			<span class="icon-style">
+				<i class="ion-log-out" on-hold="onHoldLogout()" on-tap="logoutPrompt()"></i>
+			</span>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<!-- Top Navigation Tabs -->
+	<ion-content class="nav-top" scroll="false">
+		<ion-item class="row top-panel item-borderless" ng-show="selectedTab == 'TIMELINE-HOME' || selectedTab == 'TIMELINE-MYTASK'">
+			<ion-item class="col col-50 item-borderless sub-tab-header {{selectedTab == 'TIMELINE-HOME' ? selectedSubTabDiv: noClass}}"
+				align="center" ng-click="showTimeLine()">
+				<a ng-click="showTimeLine()" ng-class="{'highlightedTab' : selectedTab == 'TIMELINE-HOME'}">TIMELINE</a>
+			</ion-item>
+			<ion-item class="col col-50 item-borderless sub-tab-header {{selectedTab == 'TIMELINE-MYTASK' ? selectedSubTabDiv: noClass}}"
+				align="center" ng-click="showTask()">
+				<a ng-click="showTask()" ng-class="{'highlightedTab' : selectedTab == 'TIMELINE-MYTASK'}">MY TASKS</a>
+				<span class="badge-item" ng-if="taskUnRead > 0" ng-class="{'badge-double-digit' : taskUnRead > 9}">{{taskUnRead}}</span>
+			</ion-item>
+		</ion-item>
+
+		<ion-item class="row top-panel item-borderless" ng-show="selectedTab == 'TIMELINE-HOME-PATIENT-SEARCH'">
+			<ion-item class="col col-10 item-borderless sub-tab-header sub-tab-header-backbutton selectedSubTabDiv" align="right" ng-click="showTimeLineFrmSearch();">
+				<span class="icon-style"><i class="ion-ios-arrow-back" ng-click="showTimeLineFrmSearch();"></i></span>
+			</ion-item>
+			<ion-item class="col col-80 item-borderless sub-tab-header selectedSubTabDiv" align="center">
+				<a ng-class="{ 'highlightedTab' : true }">SEARCH PATIENT</a>
+			</ion-item>
+		</ion-item>
+	</ion-content>
+
+	<ion-content class="has-skyline timeline-list" ng-click="showTab()">
+
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+
+		<!-- Pull Down Search -->
+		<div class="item item-input-inset" ng-show="isSwipedDown">
+			<div class="item-input-wrapper search-field">
+				<i class="icon ion-search placeholder-icon iconColor iconSizeMedium"></i>
+				<input type="text" class="col" id="careTrailFilter" placeholder="Search" ng-model="timeline.careTrailFilter" />
+				<a class="button button-clear" ng-if="timeline.careTrailFilter.length" ng-click="timeline.careTrailFilter = ''" on-tap="timeline.careTrailFilter = ''">
+					<i class="search icon ion-close-circled ion-ios-close-circled ion-android-close-circled"></i>
+				</a>
+			</div>
+		</div>
+
+		<ion-item class="inline-loading-container item-borderless" ng-if="isLoading">
+			<ion-spinner icon="ios"></ion-spinner>
+		</ion-item>
+
+		<!-- No Timeline Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab === 'TIMELINE-HOME' && (homeTimeline == null || homeTimeline.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>There is nothing available in your timeline.</p>
+				<p>Try following some patients or teams!</p>
+			</div>
+		</ion-item>
+
+		<!-- Timeline -->
+		<ion-list class="zeroBorder" id="TimelineList" ng-show="!isLoading && selectedTab == 'TIMELINE-HOME'" on-swipe-down="onSwipeDown()"
+			on-swipe-up="onSwipeUp()">
+			<div class="ctcards">
+				<ct-card type="timeline" item="timelineItem" selected-item="selectedItemState.selectedItem" ng-repeat="timelineItem in homeTimeline | filter: timeline.careTrailFilter"
+				/>
+			</div>
+		</ion-list>
+
+		<!-- Timeline Message Patient Search -->
+		<ion-list class="zeroBorder timeline-bottom-content" ng-show="selectedTab == 'TIMELINE-HOME-PATIENT-SEARCH'">
+			<ion-item class="item-complex" ng-repeat="patient in aoPatient | filter: { $: timeline.careTrailFilter }" type="item-text-wrap">
+				<ion-item class="row item-complex" ng-click="assignPatient(patient)">
+					<ion-item class="col col-top item-borderless">
+						<i class="timeline-text-md">{{patient.firstName}} {{patient.lastName}}</i>
+					</ion-item>
+				</ion-item>
+			</ion-item>
+		</ion-list>
+
+		<!-- Tasks -->
+		<ion-list class="zeroBorder my-task-list" ng-show="!isLoading && selectedTab == 'TIMELINE-MYTASK'" on-swipe-down="onSwipeDown()">
+			<div class="ctcards">
+				<ct-card type="task" item="task" selected-item="selectedItemState.selectedItem" ng-repeat="task in aoTask | filter: { $: timeline.careTrailFilter }"
+					on-click-handler="onTaskOpen(item)">
+			</div>
+		</ion-list>
+
+		<!-- No Tasks Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab === 'TIMELINE-MYTASK' && (aoTask == null || aoTask.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>You currently have no tasks.</p>
+				<p>Try creating one using the Create Task button below.</p>
+			</div>
+		</ion-item>
+
+		<ion-infinite-scroll ng-hide="userTimelinePageNo === 0 ? true : false" ng-if="selectedTab === 'TIMELINE-HOME' && loadUserTimeLine"
+			on-infinite="paginateUserTimeline()" immediate-check="false" distance="10%" id="infinite-timeline-home">
+		</ion-infinite-scroll>
+
+		<ion-infinite-scroll ng-hide="userTaskPageNo === 0 ? true : false" ng-if="selectedTab === 'TIMELINE-MYTASK' && loadUserTask"
+			on-infinite="paginateUserTask(true)" distance="10%"> </ion-infinite-scroll>
+
+	</ion-content>
+
+	<!-- Message Form -->
+	<ion-footer-bar class="subfooterchat" keyboard-attach ng-show="(selectedTab == 'TIMELINE-HOME' || selectedTab == 'TIMELINE-HOME-PATIENT-SEARCH') ">
+		<div class="row" style="margin: 0px">
+			<div class="rotating-thumbnail camera-image-thumbnail" ng-class="{'camera-image-thumbnail-hidden': base64images.length == 0}"
+				ng-show="base64images.length > 0">
+				<div class="ion-close-circled camera-image-thumbnail-close" ng-click="removeImage()"></div>
+				<img ng-src="data:image/jpeg;base64,{{base64images[0]}}">
+			</div>
+			<div class="col col-10 camera" ng-click="addImagePopup()">
+				<i class="ion-camera btn-cam"></i>
+			</div>
+			<textarea class="chat-text-area chat-text-home" ng-model="userMessage" ng-change="searchPatientByName(); autoExpandChatBox()"
+				ng-focus="showAllPatient()" id="userMessage">
+			</textarea>
+			<div class="col col-10 send" ng-show="postButton" ng-click="postUserMessage()">
+				<ion-icon class="ion-android-send btn-send"></ion-icon>
+			</div>
+		</div>
+	</ion-footer-bar>
+
+	<!-- Create Task Floating Button -->
+	<ion-footer-bar class="subfooterchat floating-button-bg smaller-floating-button" ng-show="(selectedTab == 'TIMELINE-MYTASK')">
+		<div class="row">
+			<button class="floating-button" ng-click="showCreateTask()">
+				<p>Create Task</p> 
+			</button>
+		</div>
+	</ion-footer-bar>
+
+	<!-- Card Popup -->
+	<ct-card-popup type="{{selectedItemState.selectedItemType}}" selected-item="selectedItemState.selectedItem" button-1-callback="cardButton1Callback(data)"
+		button-2-callback="cardButton2Callback(data)" image-click-handler="cardOpenImage(image)" on-status-toggle-handler="onStatusToggleHandler(taskId, status)"></ct-card-popup>
+
+</ion-view>

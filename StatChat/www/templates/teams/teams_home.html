@@ -1,0 +1,120 @@
+<ion-view cache-view="false" class="ng-cloak" view-title="{{team.teamName}}">
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="left">
+			<button class="button button-icon" ng-click="goBackByPageNo(-1)">
+				<i class="ion-ios-arrow-back"></i> 
+			</button>
+		</ion-nav-buttons>
+		<ion-nav-buttons side="right">
+			<span class="icon-style" ng-if="$root.userProfile.isExternal == false">
+				<i class="ion-ios-personadd-outline" on-hold="onHoldAddUserToTeam()" on-tap="goToAddUserToTeam()"></i>
+			</span>
+			<span class="icon-style" ng-if="$root.userProfile.isExternal == false && !team.isJoining">
+				<i ng-class="{'ion-ios-star-outline': !team.isMyTeam, 'ion-ios-star': team.isMyTeam}" on-hold="onHoldJoinTeam()" on-tap="joinLeaveTeam()"></i>
+			</span>
+			<ion-spinner icon="ios-small" ng-if="team.isJoining"></ion-spinner>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<!-- Tabs -->
+	<ion-content class="nav-top" scroll="false">
+		<ion-item class="item-complex item-borderless profileInfo headerPanelBG">
+			<ion-item class="row item-borderless">
+				<ion-item class="col col-34 sub-tab-header item-borderless {{selectedTab == 'TEAM-TIMELINE' ? selectedSubTabDiv: noClass}}"
+					align="center" ng-click="showTimeline()">
+					<a href="" ng-class="{'highlightedTab' : selectedTab == 'TEAM-TIMELINE'}">TEAM TASKS</a>
+				</ion-item>
+				<ion-item class="col col-33 sub-tab-header item-borderless {{selectedTab === 'TEAM-PATIENT' ? selectedSubTabDiv: noClass}}"
+					align="center" ng-click="showPatients()">
+					<a href="" ng-class="{'highlightedTab' : selectedTab == 'TEAM-PATIENT'}">PATIENTS</a>
+				</ion-item>
+				<ion-item class="col col-33 sub-tab-header item-borderless {{selectedTab === 'TEAM-MEMBER' ? selectedSubTabDiv: noClass}}"
+					align="center" ng-click="showMembers()">
+					<a href="" ng-class="{'highlightedTab' : selectedTab == 'TEAM-MEMBER'}">MEMBERS</a>
+				</ion-item>
+			</ion-item>
+		</ion-item>
+	</ion-content>
+
+	<ion-content class="has-skyline has-header has-footer team-detail-list">
+		<!-- Swipe-Down Search -->
+		<div class="item item-input-inset" ng-show="(teams.timeLineSwipedDown && selectedTab == 'TEAM-TIMELINE')
+													|| (teams.patientSwipedDown && selectedTab == 'TEAM-PATIENT')
+													|| (teams.memberSwipedDown && selectedTab == 'TEAM-MEMBER') ">
+			<div class="item-input-wrapper search-field">
+				<i class="icon ion-search placeholder-icon iconColor iconSizeMedium ion-ios-search ion-android-search"></i>
+				<input type="text" placeholder="Search" class="col search-box" ng-model="teams.careTrailFilter">
+				<a class="button button-clear" ng-if="teams.careTrailFilter.length" ng-click="teams.careTrailFilter = ''" on-tap="teams.careTrailFilter = ''">
+					<i class="search icon ion-close-circled ion-ios-close-circled ion-android-close-circled"></i>
+				</a>
+			</div>
+		</div>
+
+		<!-- Loading -->
+		<ion-item class="inline-loading-container item-borderless" ng-if="isLoading">
+			<ion-spinner icon="ios"></ion-spinner>
+		</ion-item>
+
+		<!-- No Timeline Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab == 'TEAM-TIMELINE' && (teamTimeline == null || teamTimeline.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>There is nothing available in this team's timeline.</p>
+			</div>
+		</ion-item>
+
+		<!-- Timeline -->
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+		<ion-list class="zeroBorder" ng-show="selectedTab == 'TEAM-TIMELINE' && teamTimeline" on-swipe-down="onTeamSwipeDown()">
+
+			<ct-card type="task" item="timelineItem" sub-type="team-task" selected-item="selectedItemState.selectedItem" ng-repeat="timelineItem in teamTimeline | filter: teams.careTrailFilter"
+			/>
+
+		</ion-list>
+
+		<ion-infinite-scroll ng-hide="teamTimeLinePageNo === 0 ? true : false" ng-if="selectedTab == 'TEAM-TIMELINE' && loadTeamTimeLine"
+			on-infinite="paginateTeamTimeLine()" immediate-check="false" distance="10%"></ion-infinite-scroll>
+
+		<!-- No Members Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab == 'TEAM-MEMBER' && (teamLnd == null || teamLnd.aoMembers == null || teamLnd.aoMembers.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>There are currently no members for this team.</p>
+			</div>
+		</ion-item>
+
+		<!-- Members -->
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+		<ion-toggle ng-model="teamLnd.onCallToggle" ng-true-value="true" ng-false-value="false" toggle-class="toggle-calm" ng-show="!isLoading && selectedTab == 'TEAM-MEMBER'">
+			Only On-Call team members
+		</ion-toggle>
+		<ion-list class="zeroBorder teamcontentscrollableheight" ng-show="selectedTab == 'TEAM-MEMBER' && teamLnd.aoMembers" on-swipe-down="onTeamSwipeDown()">
+
+			<ct-card type="user" item="member" selected-item="selectedItemState.selectedItem" ng-repeat="member in teamLnd.aoMembers | filter: teams.careTrailFilter | orderBy: 'username'"
+				ng-hide="teamLnd.onCallToggle && !member.isOnCall" />
+
+		</ion-list>
+
+		<!-- No Patients Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && selectedTab == 'TEAM-PATIENT' && (aoPatient == null || aoPatient.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>There are currently no patients being followed by this team.</p>
+			</div>
+		</ion-item>
+
+		<!-- Patients -->
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+		<ion-list class="zeroBorder teamcontentscrollableheight" ng-show="selectedTab == 'TEAM-PATIENT' && aoPatient && aoPatient.length > 0"
+			on-swipe-down="onTeamSwipeDown()" show-delete="false">
+
+			<ct-card type="patient" item="patient" selected-item="selectedItemState.selectedItem" ng-repeat="patient in aoPatient | filter: teams.careTrailFilter | orderBy: 'name'"
+			/>
+
+		</ion-list>
+
+	</ion-content>
+
+	<!-- Card Popup -->
+	<ct-card-popup type="{{selectedItemState.selectedItemType}}" sub-type="{{selectedItemState.selectedItemSubType}}" selected-item="selectedItemState.selectedItem"
+		button-1-callback="cardButton1Callback(data)" button-2-callback="cardButton2Callback(data)" image-click-handler="cardOpenImage(image)"
+		on-status-toggle-handler="onStatusToggleHandler(taskId, status)"></ct-card-popup>
+
+</ion-view>

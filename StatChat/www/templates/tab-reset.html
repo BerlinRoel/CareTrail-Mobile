@@ -1,0 +1,47 @@
+<ion-view cache-view="false" view-title="Caretrail" hide-nav-bar="true" class="login">
+	<ion-content scroll="false">
+		<div class="loginlogo hide-on-keyboard-open">
+			<img src="img/logo.svg" />
+		</div>
+		<div class="app-header-home">
+			<span class="color-white">CARE</span><span class="fontColorYellow">TRAIL</span>
+		</div>
+		<div class="loginphrase hide-on-keyboard-open">
+			Patient Care. Anywhere.
+		</div>
+	</ion-content>
+
+	<ion-footer-bar keyboard-attach class="bar-clear">
+		<form class="cleanform cleanloginform" name="loginForm" ng-submit="doLogin()" novalidate>
+			<div class="cleanloginform-email">
+				Password Reset
+			</div>
+			<div class="cleanloginform-notyou" ng-click="backToLogin()">
+				Go back
+			</div>
+			<div class="cleanfield" ng-class="{cleanfocus: emailFocused, cleanhastext: loginData.userid.length > 0}">
+				<input id="fld-email" ng-keyup="enableGo()" type="email" name="email" autocomplete="off" ng-model="loginData.userid" ng-init="loginData.userid=sessionData.userId;emailFocused=false"
+					ng-focus="emailFocused=true" ng-blur="emailFocused=false" required ng-model-options="{ allowInvalid: true }" />
+
+				<span class="cleanlabel">{{loginData.userid.length > 0 ? '' : 'Enter Your '}}Email</span>
+			</div>
+
+			<div class="cleanbuttons iconButtons">
+				<button disabled="disabled" id="btn-go" onclick="window.open('http://www.henryfordconnect.com/','_system', 'location=yes')">
+					<span ng-if="!isLoggingIn">
+						<i class="btn-icon ion-ios-arrow-thin-right"></i>
+					</span>
+					<ion-spinner icon="ios-small" ng-if="isLoggingIn"></ion-spinner>
+				</button>
+			</div>
+
+			</br>
+
+		</form>
+
+		</ion-content>
+</ion-view>
+
+</body>
+
+</html>

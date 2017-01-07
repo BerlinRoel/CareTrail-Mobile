@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="38px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>Patient Icon New Live</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M54.2393037,1.97680368 C46.5785687,-1.75207232 37.5268601,1.22353744 33.291657,8.58973222 C33.2875048,8.58973222 33.2875048,8.58973222 33.2875048,8.59389391 C33.2750484,8.61886406 33.266744,8.64383421 33.2501354,8.66464267 C33.2459832,8.67296606 33.2418311,8.68128944 33.2376789,8.68961283 C32.9470277,9.16404571 32.4321599,9.4803343 31.8508575,9.4803343 C31.265403,9.4803343 30.7546873,9.16404571 30.4640361,8.68961283 C30.4598839,8.68545113 30.4557318,8.67296606 30.4515796,8.66464267 C30.4391231,8.64383421 30.4225145,8.61886406 30.4142102,8.59389391 C30.4142102,8.59389391 30.4142102,8.59389391 30.410058,8.58973222 C26.1748549,1.21937575 17.1231464,-1.75207232 9.46241135,1.97680368 C1.32417795,5.93457274 -2.16778852,15.9642504 1.66880722,24.3750298 C4.69573179,31.0087668 21.7320438,47.4183183 28.7865635,54.0478936 L28.7907157,54.0478936 C29.5962347,54.8053215 30.6674919,55.2755927 31.8508575,55.2755927 C33.0217666,55.2755927 34.0930239,54.8136449 34.902695,54.0603786 L34.902695,54.0603786 C41.9489104,47.4432884 59.0059832,31.0170902 62.03706,24.3750298 C65.8736557,15.9642504 62.3858414,5.93457274 54.2393037,1.97680368 L54.2393037,1.97680368 Z" id="path-1"></path>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-4" y="-4" width="71.4854835" height="62.9087119">
+            <rect x="-3.88950876" y="-3.63311921" width="71.4854835" height="62.9087119" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="New-Caretrail-Icons--Footer" transform="translate(-217.000000, -60.000000)">
+            <g id="Patient-Icon-New-Live" transform="translate(217.000000, 60.000000)">
+                <g id="Group">
+                    <circle id="Oval-1" fill="#3498DB" cx="40" cy="40" r="40"></circle>
+                    <g id="Patient-Heart-2" transform="translate(8.181818, 16.363636)">
+                        <g id="Group-2">
+                            <g id="Group">
+                                <g id="`Icons/heart">
+                                    <g id="heart">
+                                        <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                        <use stroke="#3498DB" mask="url(#mask-2)" stroke-width="8" xlink:href="#path-1"></use>
+                                    </g>
+                                </g>
+                                <g id="Group-3" transform="translate(16.818182, 13.181818)" stroke="#3498DB" stroke-width="4" stroke-linecap="square">
+                                    <path d="M14.7727273,0.373655252 L14.7727273,29.4616574" id="Line"></path>
+                                    <path d="M0.104771115,15.8403137 L29.6043267,15.8403137" id="Line"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

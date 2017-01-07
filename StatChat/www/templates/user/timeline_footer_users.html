@@ -1,0 +1,12 @@
+
+<ion-popover-view class="timeline-footer-popover"> 
+	<ion-content>
+		<div class="list">
+			<a class="item" style="padding: 5px; border-bottom: solid 1px black">Patients</a>
+			<div ng-repeat="patient in rootAoPatient | orderBy: 'name'">
+				<a class="item" ng-click="setPatient(patient)"
+					ng-model="selectedUser" style="padding: 2px">@{{patient.firstName}} {{patient.lastName}}</a>
+			</div>
+		</div>
+	</ion-content> 
+</ion-popover-view>

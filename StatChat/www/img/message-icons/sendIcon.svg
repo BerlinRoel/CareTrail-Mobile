@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="26px" height="21px" viewBox="0 0 30 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+    <title>WHITE SEND ICON</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Home-Screen-1.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-Screen-1.0-Keyboard-Copy-4" transform="translate(-334.000000, -374.000000)" fill="#000000">
+            <g id="WHITE-SEND-ICON" transform="translate(334.000000, 374.000000)">
+                <path d="M0,13.4493091 L11.1021816,18.4953384 L16.4429939,28.9300003 L30.0030103,-1.77635684e-15 L0,13.4493091 L0,13.4493091 Z M3.21247926,13.4735468 L25.9415561,3.07753417 L11.6858519,17.6214706 L3.21247926,13.4735468 L3.21247926,13.4735468 Z M12.4955224,18.3695643 L26.9628153,3.58456087 L16.5805592,26.3156029 L12.4955224,18.3695643 L12.4955224,18.3695643 Z" id="SEND-ICON"></path>
+            </g>
+        </g>
+    </g>
+</svg>

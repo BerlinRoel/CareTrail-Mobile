@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="28px" height="26px" viewBox="0 0 37 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>White Compose Icon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Chat-Header" transform="translate(-366.000000, -37.000000)" stroke-width="2" stroke="#FFFFFF">
+            <g id="White-Compose-Icon" transform="translate(367.000000, 38.000000)">
+                <g id="Compose-Chat-Icon">
+                    <path d="M5.7784309,0 C2.5868109,0 0,2.72570658 0,6.08869676 L0,18.2660903 C0,21.6290804 2.5868109,24.354787 5.7784309,24.354787 L19.2614363,24.354787 L28.8921545,32.4730494 L26.9660109,24.354787 L28.8921545,24.354787 C32.0837745,24.354787 34.6705854,21.6290804 34.6705854,18.2660903 L34.6705854,6.08869676 C34.6705854,2.72570658 32.0837745,0 28.8921545,0 L5.7784309,0 Z" id="Chat-Bubble" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <g id="+" transform="translate(10.013470, 4.425287)" stroke-linecap="square">
+                        <path d="M7.78825431,-8.8817842e-16 L7.78825431,15.4885057" id="Line"></path>
+                        <path d="M-1.54543045e-13,6.63793103 L15.5765086,6.63793103" id="Line"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

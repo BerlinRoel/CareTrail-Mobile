@@ -1,0 +1,97 @@
+<ion-view view-cache="false" class="ng-cloak" view-title="Teams">
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="right">
+			<span class="icon-style" ng-if="$root.userProfile.isExternal == false">
+				<i class="ion-ios-plus-empty" on-hold="onHoldAddTeam()" on-tap="goToAddTeam()"></i>
+			</span>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<!-- Tabs -->
+	<ion-content class="nav-top" scroll="false">
+		<ion-item class="item-complex profileInfo headerPanelBG">
+			<ion-item class="row  item-borderless tabs-container">
+				<ion-item class="col item-borderless sub-tab-header {{$root.userProfile.isExternal == false ? 'col-50' : ''}} {{selectedTab == 'TEAMS_MYTEAM' ? selectedSubTabDiv: noClass}}"
+					align="center">
+					<a href ng-click="showTeamList($event)" ng-class="{'highlightedTab' : selectedTab == 'TEAMS_MYTEAM'}">MY TEAMS</a>
+				</ion-item>
+				<ion-item class="col col-50 item-borderless sub-tab-header  {{selectedTab == 'TEAMS_SEARCH' ? selectedSubTabDiv: noClass}}"
+					align="center" ng-if="$root.userProfile.isExternal == false">
+					<a href ng-click="showTeamListSearch($event)" ng-class="{'highlightedTab' : selectedTab == 'TEAMS_SEARCH'}">SEARCH</a>
+				</ion-item>
+			</ion-item>
+		</ion-item>
+	</ion-content>
+
+	<!-- Swipe-Down Search -->
+	<ion-content class="has-skyline team-list">
+		<div class="item item-input-inset" ng-show="isTeamListSwipedDown == true && selectedTab == 'TEAMS_MYTEAM'">
+			<div class="item-input-wrapper search-field">
+				<i class="icon ion-search placeholder-icon iconColor iconSizeMedium"></i>
+				<input type="text" placeholder="Search" class="col search-box" ng-model="teamInfo.careTrailFilter">
+				<a class="button button-clear" ng-if="teamInfo.careTrailFilter.length" ng-click="teamInfo.careTrailFilter = ''" on-tap="teamInfo.careTrailFilter = ''">
+					<i class="search icon ion-close-circled ion-ios-close-circled ion-android-close-circled"></i>
+				</a>
+			</div>
+		</div>
+
+		<!-- Search Tab -->
+		<div class="item item-input-inset" ng-show="selectedTab == 'TEAMS_SEARCH'">
+			<div class="item-input-wrapper search-field">
+				<i class="icon ion-search placeholder-icon iconColor iconSizeMedium"></i>
+				<input type="text" class="col" id="userSearch" placeholder="Search" autocomplete="off" name="teamSearch" ng-model="teamInfo.teamSearch"
+					ng-keydown="$event.which === 13 && searchTeamByName()" />
+				<button type="submit" class="submit-search-button" ng-if="teamInfo.teamSearch" ng-click=searchTeamByName()>
+						<i class="ion-arrow-right-c"></i>
+				</button>
+			</div>
+		</div>
+
+		<!-- Search Loading -->
+		<ion-item ng-show="selectedTab == 'TEAMS_SEARCH'" class="item-complex embedded-loading-spinner">
+			<div ng-hide="!teamInfo.isSearching" class="ion-spinner-container">
+				<ion-spinner icon="ios-small"></ion-spinner>
+			</div>
+		</ion-item>
+
+		<!-- Search Error -->
+		<ion-item ng-show="!teamInfo.isSearching && showTeamErr && selectedTab == 'TEAMS_SEARCH'" id="patient-search-error" class="search-error item-complex timeline-padding"
+			type="item-text-wrap">
+			<div class="row">
+				<span class="search-error-text">{{showTeamErrMsg}}</span>
+			</div>
+		</ion-item>
+
+		<!-- Search Results -->
+		<ion-list class="zeroBorder" ng-show="aoSearchTeam != null && selectedTab == 'TEAMS_SEARCH'">
+
+			<ct-card type="team" item="team" selected-item="selectedItemState.selectedItem" ng-repeat="team in aoSearchTeam track by $id(team)"
+				ng-show="team != null && team.teamName != null" ng-click="showTeamHomePage({{team}})" />
+
+		</ion-list>
+
+		<!-- Teams Loading -->
+		<ion-item class="inline-loading-container item-borderless" ng-if="isLoading">
+			<ion-spinner icon="ios"></ion-spinner>
+		</ion-item>
+
+		<!-- No Teams Message -->
+		<ion-item class="item-borderless" ng-show="!isLoading && (aoTeam == null || aoTeam.length == 0)">
+			<div class="item-input-wrapper empty-data-field">
+				<p>You have currently joined no teams.</p>
+				<p>Try searching for a tean to follow using the Search tab above.</p>
+			</div>
+		</ion-item>
+
+		<!-- My Teams -->
+		<ion-refresher on-refresh="getLatestData();"></ion-refresher>
+		<ion-list class="zeroBorder" id="teamsDiv" ng-show="aoTeam != null && selectedTab == 'TEAMS_MYTEAM'" on-swipe-down="onTeamListSwipeDown()"
+			show-delete="false">
+
+			<ct-card type="team" item="team" selected-item="selectedItemState.selectedItem" ng-repeat="team in aoTeam | filter: teamInfo.careTrailFilter | orderBy: 'teamName'"
+				ng-show="team != null && team.teamName != null" ng-click="showTeamHomePage({{team}})" />
+
+		</ion-list>
+	</ion-content>
+
+</ion-view>

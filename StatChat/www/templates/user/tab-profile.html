@@ -1,0 +1,38 @@
+<ion-view view-cache="false" class="ng-cloak" view-title="Profile">
+	<ion-nav-bar class="bar-light">
+		<ion-nav-buttons side="right">
+			<span class="icon-style">
+				<i class="ion-log-out" on-hold="onHoldLogout()" on-tap="logoutPrompt()"></i>
+			</span>
+		</ion-nav-buttons>
+	</ion-nav-bar>
+
+	<ion-content class="has-skyline nav-top profile" scroll="false">
+		<div class="profile-top">
+			<ng-letter-avatar dynamic="true" charCount="2" fontsize="23" shape="round" avatarcustombgcolor="#248f86" data="{{$root.userProfile.username}} {{$root.userProfile.lastName}}"
+				ng-if="!$root.userProfile.useravitar"></ng-letter-avatar>
+			<img ng-src="data:image/jpeg;base64,{{$root.userProfile.useravitar}}" class="avatar-image" ng-if="$root.userProfile.useravitar"
+			/>
+			<p class="profile-top-name">{{$root.userProfile.username}} {{$root.userProfile.lastName}}</p>
+			<p class="profile-top-email">{{$root.userProfile.emailAddress[0]}}</p>
+		</div>
+		<div class="profile-content">
+			<div class="profile-content-header">
+				Phone Numbers
+			</div>
+			<div class="profile-content-entry">
+				<div class="profile-content-entry-left"></div>
+				<div class="profile-content-entry-center">{{$root.userProfile.displayPhoneNumber}}</div>
+				<div class="profile-content-entry-right"></div>
+			</div>
+			<div class="profile-content-header">
+				Titles & Departments
+			</div>
+			<div class="profile-content-entry">
+				<div class="profile-content-entry-left"></div>
+				<div class="profile-content-entry-center">{{$root.userProfile.jobTitle == '' ? 'None' : $root.userProfile.jobTitle}}</div>
+				<div class="profile-content-entry-right"></div>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>
